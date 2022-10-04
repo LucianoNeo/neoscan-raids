@@ -180,11 +180,11 @@ export default function App() {
         <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
           {eggsFiltered?.map(egg => {
             const dateInicio = toDate(egg.inicio)
-            const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Guatemala')
-            const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Guatemala' })
+            const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
+            const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
             const dateFim = toDate(egg.fim)
             const brasilDateFim = utcToZonedTime(dateFim, 'America/Guatemala')
-            const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Guatemala' })
+            const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
             return (
 
 
