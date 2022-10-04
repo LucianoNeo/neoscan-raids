@@ -144,7 +144,7 @@ export default function App() {
           <h1 className='text-white font-bold'>OVOS A ECLODIR:</h1>
           <div className='flex'>
             <input type="text" placeholder='Digite o nome do ginásio para pesquisar'
-              value={eggSearch} onChange={e => setEggSearch(e.target.value)}
+              value={eggSearch} onChange={e => setEggSearch(e.target.value.toLowerCase())}
               className='bg-slate-900 p-2 rounded text-white md:w-80' />
           </div>
           <div className='flex gap-3 items-center'>
@@ -223,7 +223,7 @@ export default function App() {
           <h1 className='text-white font-bold'>RAIDS EM ANDAMENTO</h1>
           <div className='flex flex-col md:flex-row gap-3'>
             <input type="text" placeholder='Digite para pesquisar'
-              value={search} onChange={e => setSearch(e.target.value)}
+              value={search} onChange={e => setSearch(e.target.value.toLowerCase())}
               className='bg-slate-900 p-2 rounded text-white' />
 
             <select value={filter} onChange={(field) => setFilter(field.target.value)} name="search" id="search" className='bg-slate-900 p-2 rounded text-white'>
