@@ -183,7 +183,7 @@ export default function App() {
             const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
             const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
             const dateFim = toDate(egg.fim)
-            const brasilDateFim = utcToZonedTime(dateFim, 'America/Guatemala')
+            const brasilDateFim = utcToZonedTime(dateFim, 'America/Sao_Paulo')
             const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
             return (
 
@@ -267,11 +267,11 @@ export default function App() {
           <Carousel breakPoints={breakpoints} isRTL={false}>
             {filtered.map(raid => {
               const dateInicio = toDate(raid.inicio)
-              const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Guatemala')
-              const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Guatemala' })
+              const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
+              const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
               const dateFim = toDate(raid.fim)
-              const brasilDateFim = utcToZonedTime(dateFim, 'America/Guatemala')
-              const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Guatemala' })
+              const brasilDateFim = utcToZonedTime(dateFim, 'America/Sao_Paulo')
+              const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
               return (
 
                 raid.pokemonId &&
