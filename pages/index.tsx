@@ -98,12 +98,12 @@ export default function App() {
 
   useEffect(() => {
 
-    axios('http://localhost:3000/api/eggs')
+    axios(`${process.env.VERCEL_ADDRESS}/api/eggs`)
       .then(response => {
         setEggs(response.data.response.eggs)
       })
 
-    axios('http://localhost:3000/api/raids')
+    axios(`${process.env.VERCEL_ADDRESS}/api/raids`)
       .then(response => {
         setRaids(response.data.response.raids)
 
