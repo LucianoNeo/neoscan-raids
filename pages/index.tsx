@@ -135,17 +135,17 @@ export default function App() {
 
 
   return (
-    <div className='w-[98vw] mx-auto flex items-center flex-col'>
+    <div className='w-[160vw] md:w-[98vw] mx-auto flex items-center flex-col'>
 
       <img src='/assets/img/logo.png' alt="" width={300} />
 
-      <div className='flex flex-col gap-6 place-items-start w-full '>
-        <div className='flex bg-slate-800 w-full items-center gap-4 p-4 justify-between'>
+      <div className='flex flex-col gap-6 items-center justify-center w-full'>
+        <div className='flex bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
           <h1 className='text-white font-bold'>OVOS A ECLODIR:</h1>
           <div className='flex'>
             <input type="text" placeholder='Digite o nome do ginásio para pesquisar'
               value={eggSearch} onChange={e => setEggSearch(e.target.value)}
-              className='bg-slate-900 p-2 rounded text-white w-80' />
+              className='bg-slate-900 p-2 rounded text-white md:w-80' />
           </div>
           <div className='flex gap-3 items-center'>
 
@@ -177,7 +177,7 @@ export default function App() {
             </div>
           </div>
         </div>
-        <Carousel breakPoints={breakpoints} isRTL={false}>
+        <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
           {eggsFiltered?.map(egg => {
             const dateInicio = toDate(egg.inicio)
             const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Guatemala')
@@ -221,7 +221,7 @@ export default function App() {
       <div className='flex flex-col gap-6 place-items-start mt-10 w-full mb-20'>
         <div className='flex bg-slate-800 w-full items-center gap-4 p-4 justify-between'>
           <h1 className='text-white font-bold'>RAIDS EM ANDAMENTO</h1>
-          <div className='flex gap-3'>
+          <div className='flex flex-col md:flex-row gap-3'>
             <input type="text" placeholder='Digite para pesquisar'
               value={search} onChange={e => setSearch(e.target.value)}
               className='bg-slate-900 p-2 rounded text-white' />
