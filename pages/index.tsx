@@ -67,7 +67,7 @@ export default function App({ eggsSSR, raidsSSR }) {
       refreshInterval: 180000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
-      fallbackData: raidsSSR
+      fallbackData: eggsSSR
     }
   ).data
 
