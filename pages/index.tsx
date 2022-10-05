@@ -22,8 +22,10 @@ export async function getStaticProps() {
 
 
   return {
-    props: { raidsSSR, eggsSSR }
+    props: { raidsSSR, eggsSSR },
+    revalidate: 60
   }
+
 }
 
 export default function App({ raidsSSR, eggsSSR }) {
