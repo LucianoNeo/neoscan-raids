@@ -18,7 +18,6 @@ export default function handler(req, res) {
             async (error, result, field) => {
                 conn.release()
                 if (error) { return res.status(500).send({ error: error }) }
-                res.setHeader('Cache-Control', 's-maxage=10', 'stale-while-revalidate')
                 const response = {
                     quantity: result.length,
                     raids: await Promise.all(result.map(async (raid) => {

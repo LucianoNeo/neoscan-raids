@@ -6,24 +6,26 @@ import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
 import { toDate, utcToZonedTime, format } from 'date-fns-tz'
 import Carousel from '@itseasy21/react-elastic-carousel';
-
+import { useFetchRaids, useFetchEggs } from '../src/hooks/useFetch'
 import CreateAdModal from '../src/components/CreateAdModal'
 import EggBanner from '../src/components/EggBanner'
 import Loader from '../src/components/Loader'
+import { GetStaticProps } from 'next'
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const eggsData = await axios('https://neoscan-raids.vercel.app/api/eggs')
   const eggsResponse = await eggsData.data
   const eggsSSR = eggsResponse.response.eggs
 
-  const raidsData = await axios('https://neoscan-raids.vercel.app/api/raids')
-  const raidsResponse = await raidsData.data
-  const raidsSSR = raidsResponse.response.raids
+  // const raidsData = await axios('https://neoscan-raids.vercel.app/api/raids')
+  // const raidsResponse = await raidsData.data
+  // const raidsSSR = raidsResponse.response.raids
 
 
   return {
-    props: { raidsSSR, eggsSSR },
-    revalidate: 60
+    props: { eggsSSR },
+    revalidate: 60,
+
   }
 
 }
@@ -80,7 +82,8 @@ export default function App({ raidsSSR, eggsSSR }) {
   const [filter, setFilter] = useState('pokemon')
   const [raidsLevel, setRaidsLevel] = useState(new Set([5, 6]))
   const [eggsLevel, setEggsLevel] = useState(new Set([5, 6]))
-
+  const raidsData = useFetchRaids('/api/raids').data
+  const eggsData = useFetchEggs('/api/eggs').data
 
 
 
@@ -111,11 +114,10 @@ export default function App({ raidsSSR, eggsSSR }) {
   }
 
 
-  //FORCE SSR 2
 
   useEffect(() => {
-    setEggs(eggsSSR)
-    setRaids(raidsSSR)
+    setEggs(eggsData)
+    setRaids(raidsData)
     // axios(`/api/eggs`)
     //   .then(response => {
     //     setEggs(response.data.response.eggs)
@@ -127,7 +129,7 @@ export default function App({ raidsSSR, eggsSSR }) {
 
     //   })
 
-  }, [])
+  }, [raidsData, eggsData])
   let filtered
   let eggsFiltered
 
@@ -195,46 +197,48 @@ export default function App({ raidsSSR, eggsSSR }) {
             </div>
           </div>
         </div>
-        <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
-          {eggsFiltered?.map(egg => {
-            const dateInicio = toDate(egg.inicio)
-            const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
-            const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
-            const dateFim = toDate(egg.fim)
-            const brasilDateFim = utcToZonedTime(dateFim, 'America/Sao_Paulo')
-            const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
-            return (
+        {eggsFiltered ?
+          <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
+            {eggsFiltered?.map(egg => {
+              const dateInicio = toDate(egg.inicio)
+              const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
+              const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
+              const dateFim = toDate(egg.fim)
+              const brasilDateFim = utcToZonedTime(dateFim, 'America/Sao_Paulo')
+              const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
+              return (
 
 
-              <Dialog.Root key={egg.id}>
-                <Dialog.Trigger
-                  className='items-start justify-start text-left'
-                >
-                  <EggBanner
-                    pokemonId={egg.pokemonId}
-                    level={egg.level}
-                    bannerUrl={egg.equipe == 1 ? './assets/img/mystic.png' : egg.equipe == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
-                    title={egg.ginásio}
-                    adsCount={0}
-                    start={inicio}
-                    end={fim}
-                    eggImg={egg.eggImg}
-                    lat={egg.lat}
-                    lon={egg.lon}
+                <Dialog.Root key={egg.id}>
+                  <Dialog.Trigger
+                    className='items-start justify-start text-left'
+                  >
+                    <EggBanner
+                      pokemonId={egg.pokemonId}
+                      level={egg.level}
+                      bannerUrl={egg.equipe == 1 ? './assets/img/mystic.png' : egg.equipe == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
+                      title={egg.ginásio}
+                      adsCount={0}
+                      start={inicio}
+                      end={fim}
+                      eggImg={egg.eggImg}
+                      lat={egg.lat}
+                      lon={egg.lon}
+                    />
+
+                  </Dialog.Trigger>
+                  <CreateAdModal
+                    min={inicio}
+                    max={fim}
                   />
+                </Dialog.Root>
 
-                </Dialog.Trigger>
-                <CreateAdModal
-                  min={inicio}
-                  max={fim}
-                />
-              </Dialog.Root>
+              )
+            })
 
-            )
-          })
-
-          }
-        </Carousel>
+            }
+          </Carousel>
+          : <Loader />}
       </div>
       <div className='flex flex-col gap-6 place-items-start mt-10 w-full mb-20'>
         <div className='flex bg-slate-800 w-full items-center gap-4 p-4 justify-between'>
