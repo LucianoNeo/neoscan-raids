@@ -2,35 +2,77 @@ import { useEffect, useState } from 'react'
 
 import RaidBanner from '../src/components/RaidBanner'
 
+import Carousel from '@itseasy21/react-elastic-carousel'
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
-import { toDate, utcToZonedTime, format } from 'date-fns-tz'
-import Carousel from '@itseasy21/react-elastic-carousel';
-import { useFetchRaids, useFetchEggs } from '../src/hooks/useFetch'
+import { format, toDate, utcToZonedTime } from 'date-fns-tz'
+import { GetStaticProps } from 'next'
+import useSWR from "swr"
 import CreateAdModal from '../src/components/CreateAdModal'
 import EggBanner from '../src/components/EggBanner'
 import Loader from '../src/components/Loader'
-import { GetStaticProps } from 'next'
+
+
+
 
 export const getStaticProps: GetStaticProps = async () => {
   const eggsData = await axios('https://neoscan-raids.vercel.app/api/eggs')
   const eggsResponse = await eggsData.data
   const eggsSSR = eggsResponse.response.eggs
 
-  // const raidsData = await axios('https://neoscan-raids.vercel.app/api/raids')
-  // const raidsResponse = await raidsData.data
-  // const raidsSSR = raidsResponse.response.raids
+  const raidsData = await axios('https://neoscan-raids.vercel.app/api/raids')
+  const raidsResponse = await raidsData.data
+  const raidsSSR = raidsResponse.response.raids
 
 
   return {
-    props: { eggsSSR },
+    props: { eggsSSR, raidsSSR },
     revalidate: 60,
-
   }
 
 }
 
-export default function App({ raidsSSR, eggsSSR }) {
+
+
+
+export default function App({ eggsSSR, raidsSSR }) {
+
+  async function getRaids(url) {
+    const raidsData = await axios(url);
+    const raidsResponse = await raidsData.data
+    const raidsSWR = raidsResponse.response.raids
+    return raidsSWR
+  }
+
+  async function getEggs(url) {
+    const raidsData = await axios(url);
+    const raidsResponse = await raidsData.data
+    const raidsSWR = raidsResponse.response.eggs
+    return raidsSWR
+  }
+
+
+
+  const raidsData = useSWR('https://neoscan-raids.vercel.app/api/raids', getRaids,
+    {
+      refreshInterval: 180000,
+      revalidateIfStale: true,
+      refreshWhenOffline: true,
+      fallbackData: raidsSSR
+    }
+  ).data
+
+  const eggsData = useSWR('https://neoscan-raids.vercel.app/api/eggs', getEggs,
+    {
+      refreshInterval: 180000,
+      revalidateIfStale: true,
+      refreshWhenOffline: true,
+      fallbackData: raidsSSR
+    }
+  ).data
+
+
+
 
   interface Raids {
     id: string,
@@ -82,8 +124,7 @@ export default function App({ raidsSSR, eggsSSR }) {
   const [filter, setFilter] = useState('pokemon')
   const [raidsLevel, setRaidsLevel] = useState(new Set([5, 6]))
   const [eggsLevel, setEggsLevel] = useState(new Set([5, 6]))
-  const raidsData = useFetchRaids('/api/raids').data
-  const eggsData = useFetchEggs('/api/eggs').data
+
 
 
 
