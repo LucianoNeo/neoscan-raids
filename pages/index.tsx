@@ -109,7 +109,7 @@ export default function App({ raidsSSR, eggsSSR }) {
   }
 
 
-  //FORCE SSR
+  //FORCE SSR 2
 
   useEffect(() => {
     setEggs(eggsSSR)
