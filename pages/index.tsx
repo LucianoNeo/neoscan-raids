@@ -11,8 +11,22 @@ import CreateAdModal from '../src/components/CreateAdModal'
 import EggBanner from '../src/components/EggBanner'
 import Loader from '../src/components/Loader'
 
+export async function getStaticProps() {
+  const eggsData = await axios('/api/eggs')
+  const eggsResponse = await eggsData.data
+  const eggsSSR = eggsResponse.response.eggs
 
-export default function App() {
+  const raidsData = await axios('/api/raids')
+  const raidsResponse = await raidsData.data
+  const raidsSSR = raidsResponse.response.raids
+
+
+  return {
+    props: { raidsSSR, eggsSSR }
+  }
+}
+
+export default function App({ raidsSSR, eggsSSR }) {
 
   interface Raids {
     id: string,
@@ -97,17 +111,18 @@ export default function App() {
 
 
   useEffect(() => {
+    setEggs(eggsSSR)
+    setRaids(raidsSSR)
+    // axios(`/api/eggs`)
+    //   .then(response => {
+    //     setEggs(response.data.response.eggs)
+    //   })
 
-    axios(`/api/eggs`)
-      .then(response => {
-        setEggs(response.data.response.eggs)
-      })
+    // axios(`/api/raids`)
+    //   .then(response => {
+    //     setRaids(response.data.response.raids)
 
-    axios(`/api/raids`)
-      .then(response => {
-        setRaids(response.data.response.raids)
-
-      })
+    //   })
 
   }, [])
   let filtered
