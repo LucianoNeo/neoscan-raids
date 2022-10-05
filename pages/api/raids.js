@@ -14,11 +14,11 @@ export default function handler(req, res) {
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
         conn.query(
-            'select * from raid left join gymdetails on raid.gym_id = gymdetails.gym_id left join gym on raid.gym_id = gym.gym_id WHERE END >= NOW() + INTERVAL 185 MINUTE && START <= NOW() + INTERVAL 185 MINUTE && pokemon_id IS NOT NULL;',
+            'select * from raid left join gymdetails on raid.gym_id = gymdetails.gym_id left join gym on raid.gym_id = gym.gym_id WHERE END >= NOW() + INTERVAL 185 MINUTE && START <= NOW() + INTERVAL 185 MINUTE && pokemon_id IS NOT NULL ORDER BY END;',
             async (error, result, field) => {
                 conn.release()
                 if (error) { return res.status(500).send({ error: error }) }
-
+                res.setHeader('Cache-Control', 's-maxage=10', 'stale-while-revalidate')
                 const response = {
                     quantity: result.length,
                     raids: await Promise.all(result.map(async (raid) => {
@@ -38,6 +38,7 @@ export default function handler(req, res) {
                         }
                     }))
                 }
+
                 return res.status(200).send({ response })
             }
         )
