@@ -12,11 +12,11 @@ import EggBanner from '../src/components/EggBanner'
 import Loader from '../src/components/Loader'
 
 export async function getStaticProps() {
-  const eggsData = await axios('/api/eggs')
+  const eggsData = await axios('https://neoscan-raids.vercel.app/api/eggs')
   const eggsResponse = await eggsData.data
   const eggsSSR = eggsResponse.response.eggs
 
-  const raidsData = await axios('/api/raids')
+  const raidsData = await axios('https://neoscan-raids.vercel.app/api/raids')
   const raidsResponse = await raidsData.data
   const raidsSSR = raidsResponse.response.raids
 
