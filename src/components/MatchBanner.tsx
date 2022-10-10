@@ -57,9 +57,9 @@ export default function MatchBanner(props: MatchBannerProps) {
         <strong className=' block text-sm text-blue-500'>{props.start}</strong>
         <span className='text-white block text-sm '>Jogadores:</span>
         <div className='flex gap-2 mt-2'>
-          {props.players.map(player =>
+          {props.players.map((player, index) =>
           (
-            <span key={player.username} className='text-white text-xs bg-green-700 rounded py-1 px-2 flex items-center justify-center'>{player.username}</span>
+            <span key={index} className='text-white text-xs bg-green-700 rounded py-1 px-2 flex items-center justify-center'>{player.username}</span>
           )
           )}
         </div>
