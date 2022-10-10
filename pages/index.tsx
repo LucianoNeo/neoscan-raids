@@ -8,9 +8,11 @@ import axios from 'axios'
 import { format, toDate, utcToZonedTime } from 'date-fns-tz'
 import { GetStaticProps } from 'next'
 import useSWR from "swr"
-import CreateAdModal from '../src/components/CreateAdModal'
+import CreateEggModal from '../src/components/CreateEggModal'
 import EggBanner from '../src/components/EggBanner'
 import Loader from '../src/components/Loader'
+import CreateRaidModal from '../src/components/CreateRaidModal'
+import MatchBanner from '../src/components/MatchBanner'
 
 
 
@@ -107,6 +109,26 @@ export default function App({ eggsSSR, raidsSSR }) {
     }
   }
 
+  interface Matches {
+    gymId: string
+    id: string
+    playType: string
+    pokemonName: string
+    pokemonImg: string
+    gym: string
+    hourStart: string
+    hourEnd: string
+    players: [{
+      username: string,
+    }]
+    lat: string
+    lon: string
+    level: number
+    team: number
+    pokemonId: number,
+  }
+
+
   const breakpoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2 },
@@ -119,6 +141,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const [raids, setRaids] = useState<Raids[]>([])
   const [eggs, setEggs] = useState<Eggs[]>([])
+  const [matches, setMatches] = useState<Matches[]>([])
   const [search, setSearch] = useState('')
   const [eggSearch, setEggSearch] = useState('')
   const [filter, setFilter] = useState('pokemon')
@@ -159,10 +182,13 @@ export default function App({ eggsSSR, raidsSSR }) {
   useEffect(() => {
     setEggs(eggsData)
     setRaids(raidsData)
-    // axios(`/api/eggs`)
-    //   .then(response => {
-    //     setEggs(response.data.response.eggs)
-    //   })
+
+    axios(`/api/matches`)
+      .then(response => {
+        setMatches(response.data)
+      })
+
+
 
     // axios(`/api/raids`)
     //   .then(response => {
@@ -192,13 +218,100 @@ export default function App({ eggsSSR, raidsSSR }) {
   }
 
 
-
-
-
   return (
     <div className='w-[160vw] md:w-[98vw] mx-auto flex items-center flex-col'>
 
       <img src='/assets/img/logo.png' alt="" width={300} />
+
+      <div className='flex flex-col gap-6 items-center justify-center w-full'>
+        <div className='flex bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
+          <h1 className='text-white font-bold'>PARTIDAS AGENDADAS:</h1>
+          <div className='flex'>
+            <input type="text" placeholder='Digite o nome do ginásio para pesquisar'
+              value={eggSearch} onChange={e => setEggSearch(e.target.value.toLowerCase())}
+              className='bg-slate-900 p-2 rounded text-white md:w-80' />
+          </div>
+          <div className='flex gap-3 items-center'>
+
+            <h1 className='text-white'>FILTROS:</h1>
+            <div className='text-white text-xs grid  grid-cols-2 gap-1 flex-wrap'>
+              <div className='gap-2 flex'>
+                <label htmlFor="level1">Level 1</label>
+                <input type="checkbox" name="level1" id="1" checked={eggsLevel.has(1)}
+                  onChange={() => handleEggLevel(1)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level3">Level 3</label>
+                <input type="checkbox" name="level3" id="3" checked={eggsLevel.has(3)}
+                  onChange={() => handleEggLevel(3)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level5">Level 5</label>
+                <input type="checkbox" name="level3" id="3" checked={eggsLevel.has(5)}
+                  onChange={() => handleEggLevel(5)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level6">Mega Raids</label>
+                <input type="checkbox" name="level6" id="6" checked={eggsLevel.has(6)}
+                  onChange={() => handleEggLevel(6)} />
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+        {matches ?
+          <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
+            {matches?.map(match => {
+              const dateInicio = toDate(match.hourStart)
+              const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
+              const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
+              const dateFim = toDate(match.hourEnd)
+              const brasilDateFim = utcToZonedTime(dateFim, 'America/Sao_Paulo')
+              const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
+              return (
+
+
+                <Dialog.Root key={match.id}>
+                  <Dialog.Trigger
+                    className='items-start justify-start text-left'
+                  >
+
+                    <MatchBanner
+                      pokemonId={match.pokemonId}
+                      name={match.pokemonName}
+                      level={match.level}
+                      bannerUrl={match.team == 1 ? './assets/img/mystic.png' : match.team == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
+                      title={match.gym}
+                      adsCount={0}
+                      start={inicio}
+                      end={fim}
+                      pokemonImg={match.pokemonImg}
+                      lat={match.lat}
+                      lon={match.lon}
+                      players={match.players}
+                    />
+
+                  </Dialog.Trigger>
+                  {/* <CreateEggModal
+                    level={match.level}
+                    min={inicio}
+                    max={fim}
+                    img={match.matchImg}
+                    gym={match.ginásio}
+                    lat={match.lat}
+                    lon={match.lon}
+                  /> */}
+                </Dialog.Root>
+
+              )
+            })
+
+            }
+          </Carousel>
+          : <Loader />}
+      </div>
 
       <div className='flex flex-col gap-6 items-center justify-center w-full'>
         <div className='flex bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
@@ -268,9 +381,14 @@ export default function App({ eggsSSR, raidsSSR }) {
                     />
 
                   </Dialog.Trigger>
-                  <CreateAdModal
+                  <CreateEggModal
+                    level={egg.level}
                     min={inicio}
                     max={fim}
+                    img={egg.eggImg}
+                    gym={egg.ginásio}
+                    lat={egg.lat}
+                    lon={egg.lon}
                   />
                 </Dialog.Root>
 
@@ -281,6 +399,10 @@ export default function App({ eggsSSR, raidsSSR }) {
           </Carousel>
           : <Loader />}
       </div>
+
+
+
+
       <div className='flex flex-col gap-6 place-items-start mt-10 w-full mb-20'>
         <div className='flex bg-slate-800 w-full items-center gap-4 p-4 justify-between'>
           <h1 className='text-white font-bold'>RAIDS EM ANDAMENTO</h1>
@@ -356,9 +478,17 @@ export default function App({ eggsSSR, raidsSSR }) {
                       lon={raid.lon}
                     />
                   </Dialog.Trigger>
-                  <CreateAdModal
+
+                  <CreateRaidModal
+                    level={raid.level}
                     min={inicio}
                     max={fim}
+                    img={raid.pokemonImg}
+                    gym={raid.ginásio}
+                    lat={raid.lat}
+                    lon={raid.lon}
+                    pokemonName={raid.pokemonName}
+                    gymId={raid.id}
                   />
                 </Dialog.Root>
 

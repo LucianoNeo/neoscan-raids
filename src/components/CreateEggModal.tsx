@@ -9,10 +9,37 @@ import axios from 'axios'
 interface modalProps {
     min: string
     max: string
+    level: number,
+    img: string,
+    gym: string,
+    lat: string,
+    lon: string
 }
 
 
-export default function CreateAdModal(props: modalProps) {
+
+
+export default function CreateEggModal(props: modalProps) {
+
+    const tilemap = {
+        "style": "klokantech-basic",
+        "latitude": props.lat,
+        "longitude": props.lon,
+        "zoom": 17,
+        "width": 200,
+        "height": 200,
+        "scale": 1,
+        "markers": [
+            {
+                "url": `/assets/img/egg-level-${props.level}.png`,
+                "latitude": props.lat,
+                "longitude": props.lon,
+                "width": 50,
+                "height": 50
+            }
+        ]
+    }
+
 
     interface Game {
         id: string,
@@ -37,7 +64,7 @@ export default function CreateAdModal(props: modalProps) {
         }
 
         try {
-            await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
+            await axios.post(`http://localhost:3333/games/${data.game}/matches`, {
                 name: data.name,
                 yearsPlaying: Number(data.yearsPlaying),
                 discord: data.discord,
@@ -46,11 +73,11 @@ export default function CreateAdModal(props: modalProps) {
                 hourEnd: data.hourEnd,
                 useVoiceChannel: useVoiceChannel
             })
-            alert('Anúncio criado com sucesso!')
+            alert('Raid agendada com sucesso!')
 
         } catch (error) {
             console.log(error)
-            alert('Erro ao criar o anúncio!')
+            alert('Erro ao criar agendamento!')
         }
 
 
@@ -59,14 +86,15 @@ export default function CreateAdModal(props: modalProps) {
 
 
 
-
-
-
     useEffect(() => {
-        axios('http://localhost:3333/games')
-            .then(response => {
-                setGames(response.data)
-            })
+        // axios('http://localhost:3333/games')
+        //     .then(response => {
+        //         setGames(response.data)
+        //     })
+        // axios.post('https://tileserver.neoscan.com.br/staticmap', tilemap)
+        //     .then(response => {
+        //         console.log(response.data)
+        //     })
 
     }, [])
 
@@ -79,9 +107,55 @@ export default function CreateAdModal(props: modalProps) {
             <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-black/25 z-20'
             >
                 <Dialog.Title className='text-3xl font-black'>Agende uma Raid</Dialog.Title>
+                <div className='h-24 my-4 flex items-center justify-start gap-2 '>
+                    <img src={props.img} alt="" width={50} height={50} />
+                    <div className='p-2 w-[50%]'>
+                        <h1 className='font-bold'>Ovo Level {props.level}</h1>
+                        <span>Ginásio: </span>
+                        <h1 className='font-bold'>{props.gym}</h1>
+                    </div>
+                    <div className='w-[40%]'>
+                        <select
+                            className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
+                            id='game' name='game'>
+                            <option disabled selected value=''>
+                                Qual é o pokémon?
+                            </option>
+                            <option>Não sei ainda</option>
+                            <option>Pokemon 1</option>
+                            <option>Pokemon 2</option>
+                            <option>Pokemon 3</option>
 
 
-                <form className='mt-8 flex flex-col gap-4' onSubmit={handleCreateAd}>
+                        </select>
+
+                    </div>
+                </div>
+
+                <form className='flex flex-col gap-4' onSubmit={handleCreateAd}>
+                    <div className='flex items-center justify-between w-full'>
+
+                        <div className='p-2 gap-2 flex flex-col w-[60%]'>
+                            <h1>Qual é seu usuário?</h1>
+                            <Input type="text" name="username" id="username" placeholder='Usuário no Pokémon GO' />
+                        </div>
+
+                        <div className=' flex flex-col gap-2 flex-1'>
+                            <label htmlFor='game-type'>Como vai participar?</label>
+                            <select
+                                className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
+                                id='game-type' name='game-type'>
+                                <option disabled selected value=''>
+                                    Seu estilo de jogo
+                                </option>
+                                <option>🚶‍♂️ Presencial</option>
+                                <option>✈ Remoto</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
                     {/* <div className='flex flex-col gap-2'>
                         <label className='font-semibold' htmlFor='game'>Qual o game?</label>
                         <select
@@ -119,7 +193,7 @@ export default function CreateAdModal(props: modalProps) {
                         <div className='flex flex-col gap-2 items-center justify-center'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
 
-                            <Input type="time" name="hourStart" id="hourStart" min='18:00:00' max='19:00:00' />
+                            <Input type="time" name="hourStart" id="hourStart" min={props.min} max={props.max} />
                             {/*                                 
                                 <Input type="time" name="hourEnd" id="hourEnd" placeholder='Até' /> */}
 

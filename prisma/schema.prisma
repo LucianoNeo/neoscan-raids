@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Raid {
+  gymId       String
+  id          String   @id @default(uuid())
+  playType    String
+  pokemonName String
+  pokemonImg  String
+  gym         String
+  hourStart   DateTime
+  hourEnd     DateTime
+  createdAt   DateTime @default(now())
+  team        Int
+  lat         String
+  lon         String
+  level       Int
+
+  players Players[]
+}
+
+model Players {
+  raidId   String
+  id       String @id @default(uuid())
+  username String
+
+  raid Raid @relation(fields: [raidId], references: [id])
+}
