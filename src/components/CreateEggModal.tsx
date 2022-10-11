@@ -13,32 +13,17 @@ interface modalProps {
     img: string,
     gym: string,
     lat: string,
-    lon: string
+    lon: string,
+    pokemonNames: any,
+    gymId: string,
+    gymTeam: string
+
 }
 
 
 
 
 export default function CreateEggModal(props: modalProps) {
-
-    const tilemap = {
-        "style": "klokantech-basic",
-        "latitude": props.lat,
-        "longitude": props.lon,
-        "zoom": 17,
-        "width": 200,
-        "height": 200,
-        "scale": 1,
-        "markers": [
-            {
-                "url": `/assets/img/egg-level-${props.level}.png`,
-                "latitude": props.lat,
-                "longitude": props.lon,
-                "width": 50,
-                "height": 50
-            }
-        ]
-    }
 
 
     interface Game {
@@ -48,9 +33,8 @@ export default function CreateEggModal(props: modalProps) {
 
 
 
-    const [games, setGames] = useState<Game[]>([])
-    const [weekDays, setWeekDays] = useState<string[]>([])
-    const [useVoiceChannel, setUseVoiceChannel] = useState(false)
+    const [pokemonNames, setPokemonNames] = useState([])
+
 
     async function handleCreateAd(e: FormEvent) {
         e.preventDefault()
@@ -59,22 +43,33 @@ export default function CreateEggModal(props: modalProps) {
 
         const data = Object.fromEntries(formData)
 
-        if (!data.name) {
+        if (!data.username) {
             return alert('Você deve preencher todos os campos!')
         }
 
         try {
-            await axios.post(`http://localhost:3333/games/${data.game}/matches`, {
-                name: data.name,
-                yearsPlaying: Number(data.yearsPlaying),
-                discord: data.discord,
-                weekDays: weekDays.map(Number),
-                hourStart: data.hourStart,
-                hourEnd: data.hourEnd,
-                useVoiceChannel: useVoiceChannel
-            })
-            alert('Raid agendada com sucesso!')
+            const dataFull = {
+                username: data.username,
+                playType: data.playType,
+                hourStart: new Date(2022, 11, 10),
+                hourEnd: new Date(2022, 11, 10),
+                raidLevel: props.level,
+                pokemonImg: props.img,
+                pokemonName: data.pokemon,
+                gym: props.gym,
+                id: props.gymId,
+                raidId: props.gymId,
+                gymTeam: props.gymTeam,
+                playerLevel: Number(data.playerLevel),
+                lat: `${props.lat}`,
+                lon: `${props.lon}`,
+                team: data.team
+            }
 
+            await axios.post(`/api/matches`, dataFull)
+
+            alert('Raid agendada com sucesso!')
+            location.reload()
         } catch (error) {
             console.log(error)
             alert('Erro ao criar agendamento!')
@@ -87,15 +82,16 @@ export default function CreateEggModal(props: modalProps) {
 
 
     useEffect(() => {
-        // axios('http://localhost:3333/games')
-        //     .then(response => {
-        //         setGames(response.data)
-        //     })
-        // axios.post('https://tileserver.neoscan.com.br/staticmap', tilemap)
-        //     .then(response => {
-        //         console.log(response.data)
-        //     })
-
+        const pokemonNamesUnique = () => {
+            let names = []
+            const namesUnique = []
+            props.pokemonNames.map(pokemon => {
+                names.push(pokemon.pokemonName)
+            })
+            namesUnique.push(...new Set(names))
+            setPokemonNames(namesUnique)
+        }
+        pokemonNamesUnique()
     }, [])
 
 
@@ -107,156 +103,108 @@ export default function CreateEggModal(props: modalProps) {
             <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-black/25 z-20'
             >
                 <Dialog.Title className='text-3xl font-black'>Agende uma Raid</Dialog.Title>
-                <div className='h-24 my-4 flex items-center justify-start gap-2 '>
-                    <img src={props.img} alt="" width={50} height={50} />
-                    <div className='p-2 w-[50%]'>
-                        <h1 className='font-bold'>Ovo Level {props.level}</h1>
-                        <span>Ginásio: </span>
-                        <h1 className='font-bold'>{props.gym}</h1>
-                    </div>
-                    <div className='w-[40%]'>
-                        <select
-                            className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
-                            id='game' name='game'>
-                            <option disabled selected value=''>
-                                Qual é o pokémon?
-                            </option>
-                            <option>Não sei ainda</option>
-                            <option>Pokemon 1</option>
-                            <option>Pokemon 2</option>
-                            <option>Pokemon 3</option>
-
-
-                        </select>
-
-                    </div>
-                </div>
-
                 <form className='flex flex-col gap-4' onSubmit={handleCreateAd}>
-                    <div className='flex items-center justify-between w-full'>
-
-                        <div className='p-2 gap-2 flex flex-col w-[60%]'>
-                            <h1>Qual é seu usuário?</h1>
-                            <Input type="text" name="username" id="username" placeholder='Usuário no Pokémon GO' />
+                    <div className=' my-4 flex items-center justify-start gap-2'>
+                        <img src={props.img} alt="" width={50} height={50} />
+                        <div className='p-2 w-[50%]'>
+                            <h1 className='font-bold'>Ovo Level {props.level}</h1>
+                            <span>Ginásio: </span>
+                            <h1 className='font-bold'>{props.gym}</h1>
                         </div>
-
-                        <div className=' flex flex-col gap-2 flex-1'>
-                            <label htmlFor='game-type'>Como vai participar?</label>
+                        <div className=''>
                             <select
-                                className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
-                                id='game-type' name='game-type'>
+                                className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500 w-36'
+                                id='pokemon' name='pokemon'>
                                 <option disabled selected value=''>
-                                    Seu estilo de jogo
+                                    Pokémon?
                                 </option>
-                                <option>🚶‍♂️ Presencial</option>
-                                <option>✈ Remoto</option>
+                                <option>Não sei ainda</option>
+                                {pokemonNames.map(pokemon => (
+                                    <option key={pokemon}>{pokemon.toUpperCase()}</option>
+                                ))}
+
                             </select>
 
                         </div>
-
                     </div>
 
-                    {/* <div className='flex flex-col gap-2'>
-                        <label className='font-semibold' htmlFor='game'>Qual o game?</label>
-                        <select
-                            className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
-                            id='game' name='game'>
-                            <option disabled selected value=''>
-                                Selecione o game que deseja jogar
-                            </option>
 
-                            {games.map(game => {
-                                return <option key={game.id} value={game.id}>{game.title}</option>
 
-                            })}
-                        </select>
+                    <div className='flex items-center w-full flex-col'>
 
-                    </div>
+                        <div className='w-full flex items-center justify-between'>
+                            <div className='gap-2 flex flex-col'>
+                                <h1>Qual é seu usuário?</h1>
+                                <Input type="text" name="username" id="username" placeholder='no Pokémon GO'
+                                />
+                            </div>
 
-                    <div className='flex flex-col gap-2'>
-                        <label htmlFor="name">Seu nome (ou nickname)</label>
-                        <Input name='name' id='name' placeholder='Como te chamam dentro do game?' />
-                    </div>
+                            <div className=' flex flex-col gap-2'>
+                                <label htmlFor='playerLevel'>Qual o seu nível?</label>
+                                <Input
+                                    name='playerLevel'
+                                    id='playerLevel'
+                                    type='number'
+                                    placeholder='Digite seu nível'
+                                    min={5}
+                                    max={50}
+                                />
+                            </div>
 
-                    <div className='grid grid-cols-2 gap-6'>
-                        <div className='flex flex-col gap-2'>
-                            <label htmlFor="yearsPlaying">Joga há quantos anos?</label>
-                            <Input name='yearsPlaying' id="yearsPlaying" type='number' placeholder='Tudo bem ser ZERO' />
                         </div>
 
-                        <div className='flex flex-col gap-2'>
-                            <label htmlFor="discord">Qual o seu discord?</label>
-                            <Input name='discord' id="discord" type='text' placeholder='Usuario#0000' />
+                        <div className='w-full flex items-center justify-between'>
+                            <div className=' flex flex-col gap-2 mt-1'>
+                                <label htmlFor='playType'>Como vai participar?</label>
+                                <select
+                                    className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500 w-48'
+                                    id='playType' name='playType'>
+                                    <option disabled selected value=''>
+                                        Seu estilo de jogo
+                                    </option>
+                                    <option>🚶‍♂️ Presencial</option>
+                                    <option>✈ Remoto</option>
+                                </select>
+
+                            </div>
+
+                            <div className=' flex flex-col gap-2 mt-1'>
+                                <label htmlFor='team'>Qual a sua equipe?</label>
+                                <select
+                                    className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
+                                    id='team' name='team'>
+                                    <option disabled selected value=''>
+                                        Selecione sua equipe
+                                    </option>
+                                    <option value='valor'>
+                                        Valor
+                                    </option>
+                                    <option value='instinct'>
+                                        Instinct
+                                    </option>
+                                    <option value='mystic'>
+                                        Mystic
+                                    </option>
+                                </select>
+
+                            </div>
+
                         </div>
-                    </div> */}
+
+
+                    </div>
+
                     <div className='flex w-full items-center justify-center'>
                         <div className='flex flex-col gap-2 items-center justify-center'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
 
-                            <Input type="time" name="hourStart" id="hourStart" min={props.min} max={props.max} />
-                            {/*                                 
-                                <Input type="time" name="hourEnd" id="hourEnd" placeholder='Até' /> */}
+                            <Input type="time" name="hourStart" id="hourStart" min={props.min} />
 
-                            {/* <ToggleGroup.Root
-                                type='multiple'
-                                className='grid grid-cols-4 gap-2'
-                                value={weekDays}
-                                onValueChange={setWeekDays}
-                            >
-                                <ToggleGroup.Item
-                                    value='0'
-                                    className={`w-8 h-8 rounded ${weekDays.includes('0') ? 'bg-violet-500' : ' bg-zinc-900'}`}
-                                    title='Domingo'>D</ToggleGroup.Item>
-                                <ToggleGroup.Item
-                                    value='1'
-                                    className={`w-8 h-8 rounded ${weekDays.includes('1') ? 'bg-violet-500' : ' bg-zinc-900'}`}
-                                    title='Segunda'>S</ToggleGroup.Item>
-                                <ToggleGroup.Item
-                                    value='2'
-                                    className={`w-8 h-8 rounded ${weekDays.includes('2') ? 'bg-violet-500' : ' bg-zinc-900'}`}
-                                    title='Terça'>T</ToggleGroup.Item>
-                                <ToggleGroup.Item
-                                    value='3'
-                                    className={`w-8 h-8 rounded ${weekDays.includes('3') ? 'bg-violet-500' : ' bg-zinc-900'}`}
-                                    title='Quarta'>Q</ToggleGroup.Item>
-                                <ToggleGroup.Item
-                                    value='4'
-                                    className={`w-8 h-8 rounded ${weekDays.includes('4') ? 'bg-violet-500' : ' bg-zinc-900'}`}
-                                    title='Quinta'>Q</ToggleGroup.Item>
-                                <ToggleGroup.Item
-                                    value='5'
-                                    className={`w-8 h-8 rounded ${weekDays.includes('5') ? 'bg-violet-500' : ' bg-zinc-900'}`}
-                                    title='Sexta'>S</ToggleGroup.Item>
-                                <ToggleGroup.Item
-                                    value='6'
-                                    className={`w-8 h-8 rounded ${weekDays.includes('6') ? 'bg-violet-500' : ' bg-zinc-900'}`}
-                                    title='Sábado'>S</ToggleGroup.Item>
-                            </ToggleGroup.Root> */}
 
                         </div>
-                        {/* <div className='flex flex-col gap-2 flex-1'>
-                            <label htmlFor="hourStart">Qual horário do dia?</label>
 
-
-                        </div> */}
                     </div>
-                    {/* <label className='mt-2 flex gap-2 text-sm items-center'>
-                        <Ckeckbox.Root
-                            onCheckedChange={(checked) => {
-                                if (checked == true) {
-                                    setUseVoiceChannel(true)
-                                } else {
-                                    setUseVoiceChannel(false)
-                                }
-                            }}
-                            className='w-6 h-6 rounded bg-zinc-900 p-1'
-                        >
-                            <Ckeckbox.Indicator>
-                                <Check className='w-4 h-4 text-emerald-400' />
-                            </Ckeckbox.Indicator>
-                        </Ckeckbox.Root>
-                        Costumo me conectar ao chat de voz
-                    </label> */}
+
                     <footer className='mt-4 flex justify-end gap-4'>
                         <Dialog.Close
                             className='bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600'>

@@ -1,10 +1,8 @@
-import * as  Dialog from '@radix-ui/react-dialog'
-import * as  Ckeckbox from '@radix-ui/react-checkbox'
-import * as  ToggleGroup from '@radix-ui/react-toggle-group'
-import { Check, GameController } from 'phosphor-react'
-import Input from './Form/Input'
-import { useEffect, useState, FormEvent } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
+import { GameController } from 'phosphor-react'
+import { FormEvent, useEffect } from 'react'
+import Input from './Form/Input'
 
 interface modalProps {
     min: string
@@ -20,19 +18,7 @@ interface modalProps {
 }
 
 
-
-
 export default function CreateRaidModal(props: modalProps) {
-
-
-    interface Game {
-        id: string,
-        title: string,
-    }
-
-
-
-    const [games, setGames] = useState<Game[]>([])
 
 
     async function handleCreateAd(e: FormEvent) {
@@ -52,25 +38,17 @@ export default function CreateRaidModal(props: modalProps) {
             const dataFull = {
                 username: data.username,
                 playType: data.playType,
-                hourStart: new Date(2022, 11, 10),
-                hourEnd: new Date(2022, 11, 10),
-                raidLevel: props.level,
-                pokemonImg: props.img,
-                pokemonName: props.pokemonName,
                 gym: props.gym,
                 id: props.gymId,
-                raidId: props.gymId,
                 gymTeam: props.gymTeam,
                 playerLevel: Number(data.playerLevel),
-                lat: `${props.lat}`,
-                lon: `${props.lon}`,
                 team: data.team
             }
-            console.log(dataFull)
+
             await axios.post(`/api/matches`, dataFull)
 
-            alert('Raid agendada com sucesso!')
-
+            alert('Entrada na Raid confirmada!')
+            location.reload()
         } catch (error) {
             console.log(error)
             alert('Erro ao criar agendamento!')
@@ -89,12 +67,13 @@ export default function CreateRaidModal(props: modalProps) {
 
 
     return (
+
         <Dialog.Portal>
             <Dialog.Overlay className='bg-black/60 inset-0 fixed'
             />
             <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-black/25 z-20'
             >
-                <Dialog.Title className='text-3xl font-black'>Agende uma Raid</Dialog.Title>
+                <Dialog.Title className='text-3xl font-black'>Participar desta Raid</Dialog.Title>
                 <form className='flex flex-col gap-4' onSubmit={handleCreateAd}>
                     <div className=' my-4 flex items-center justify-start gap-2'>
                         <img src={props.img} alt="" width={100} height={100} />
@@ -172,17 +151,6 @@ export default function CreateRaidModal(props: modalProps) {
 
                     </div>
 
-                    <div className='flex w-full items-center justify-center'>
-                        <div className='flex flex-col gap-2 items-center justify-center'>
-                            <label htmlFor="hourStart">Qual horário de início?</label>
-
-                            <Input type="time" name="hourStart" id="hourStart" min={props.min} max={props.max} />
-
-
-                        </div>
-
-                    </div>
-
                     <footer className='mt-4 flex justify-end gap-4'>
                         <Dialog.Close
                             className='bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600'>
@@ -192,12 +160,13 @@ export default function CreateRaidModal(props: modalProps) {
                             className='bg-violet-500 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600'
                             type='submit'>
                             <GameController size={24} />
-                            Marcar Raid
+                            Participar
                         </button>
                     </footer>
                 </form>
 
             </Dialog.Content>
         </Dialog.Portal>
+
     )
 }
