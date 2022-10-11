@@ -11,8 +11,7 @@ datasource db {
 }
 
 model Raid {
-  gymId       String
-  id          String   @id @default(uuid())
+  id          String   @id
   pokemonName String
   pokemonImg  String
   gym         String
@@ -29,7 +28,7 @@ model Raid {
 
 model Players {
   raidId      String
-  id          String @id @default(uuid())
+  id          Int    @id @default(autoincrement())
   username    String
   team        String
   playerLevel Int

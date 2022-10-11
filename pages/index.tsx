@@ -13,16 +13,17 @@ import EggBanner from '../src/components/EggBanner'
 import Loader from '../src/components/Loader'
 import CreateRaidModal from '../src/components/CreateRaidModal'
 import MatchBanner from '../src/components/MatchBanner'
+import EnterRaidModal from '../src/components/EnterRaidModal'
 
 
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const eggsData = await axios('https://neoscan-raids.vercel.app/api/eggs')
+  const eggsData = await axios(process.env.API_EGGS)
   const eggsResponse = await eggsData.data
   const eggsSSR = eggsResponse.response.eggs
 
-  const raidsData = await axios('https://neoscan-raids.vercel.app/api/raids')
+  const raidsData = await axios(process.env.API_RAIDS)
   const raidsResponse = await raidsData.data
   const raidsSSR = raidsResponse.response.raids
 
@@ -55,7 +56,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
 
 
-  const raidsData = useSWR('https://neoscan-raids.vercel.app/api/raids', getRaids,
+  const raidsData = useSWR(process.env.API_RAIDS, getRaids,
     {
       refreshInterval: 180000,
       revalidateIfStale: true,
@@ -64,7 +65,7 @@ export default function App({ eggsSSR, raidsSSR }) {
     }
   ).data
 
-  const eggsData = useSWR('https://neoscan-raids.vercel.app/api/eggs', getEggs,
+  const eggsData = useSWR(process.env.API_EGGS, getEggs,
     {
       refreshInterval: 180000,
       revalidateIfStale: true,
@@ -123,12 +124,14 @@ export default function App({ eggsSSR, raidsSSR }) {
     raidLevel: number
     gymTeam: number
     pokemonId: number,
-    players: [{
-      username: string,
-      playerLevel: number
-      team: string
-      playType: string
-    }]
+    players: [
+      {
+        username: string,
+        playerLevel: number
+        team: string
+        playType: string
+      }
+    ]
   }
 
 
@@ -151,6 +154,12 @@ export default function App({ eggsSSR, raidsSSR }) {
   const [raidsLevel, setRaidsLevel] = useState(new Set([5, 6]))
   const [eggsLevel, setEggsLevel] = useState(new Set([5, 6]))
 
+  let filtered
+  let eggsFiltered
+  let level1Names = []
+  let level3Names = []
+  let level5Names = []
+  let level6Names = []
 
 
 
@@ -186,22 +195,14 @@ export default function App({ eggsSSR, raidsSSR }) {
     setEggs(eggsData)
     setRaids(raidsData)
 
-    axios(`api/matches`)
+    axios(process.env.API_MATCHES)
       .then(response => {
         setMatches(response.data)
       })
 
-
-
-    // axios(`/api/raids`)
-    //   .then(response => {
-    //     setRaids(response.data.response.raids)
-
-    //   })
-
   }, [raidsData, eggsData])
-  let filtered
-  let eggsFiltered
+
+
 
   if (eggs) {
     eggsFiltered = eggs.filter((e) => eggsLevel.has(e.level))
@@ -213,6 +214,12 @@ export default function App({ eggsSSR, raidsSSR }) {
   if (raids) {
 
     filtered = raids.filter((e) => raidsLevel.has(e.level))
+    level1Names = raids.filter(raid => raid.level == 1)
+    level3Names = raids.filter(raid => raid.level == 3)
+    level5Names = raids.filter(raid => raid.level == 5)
+    level6Names = raids.filter(raid => raid.level == 6)
+
+
   }
   if (filter == 'pokemon') {
     filtered = filtered?.filter((filtered) => filtered.pokemonName.toLowerCase().includes(search))
@@ -287,9 +294,9 @@ export default function App({ eggsSSR, raidsSSR }) {
                       raidLevel={match.raidLevel}
                       bannerUrl={match.gymTeam == 1 ? './assets/img/mystic.png' : match.gymTeam == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
                       title={match.gym}
-                      adsCount={0}
-                      start={inicio}
-                      end={fim}
+                      playersCount={match.players.length}
+                      start={match.hourStart}
+                      end={match.hourEnd}
                       pokemonImg={match.pokemonImg}
                       lat={match.lat}
                       lon={match.lon}
@@ -297,15 +304,18 @@ export default function App({ eggsSSR, raidsSSR }) {
                     />
 
                   </Dialog.Trigger>
-                  {/* <CreateEggModal
-                    level={match.level}
-                    min={inicio}
-                    max={fim}
-                    img={match.matchImg}
-                    gym={match.ginásio}
+                  <EnterRaidModal
+                    level={match.raidLevel}
+                    min={match.hourStart}
+                    max={match.hourEnd}
+                    img={match.pokemonImg}
+                    gym={match.gym}
                     lat={match.lat}
                     lon={match.lon}
-                  /> */}
+                    pokemonName={match.pokemonName}
+                    gymId={match.id}
+                    gymTeam={match.gymTeam}
+                  />
                 </Dialog.Root>
 
               )
@@ -316,7 +326,7 @@ export default function App({ eggsSSR, raidsSSR }) {
           : <Loader />}
       </div>
 
-      <div className='flex flex-col gap-6 items-center justify-center w-full'>
+      <div className='flex flex-col gap-6 items-center justify-center w-full mt-6'>
         <div className='flex bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
           <h1 className='text-white font-bold'>OVOS A ECLODIR:</h1>
           <div className='flex'>
@@ -390,8 +400,15 @@ export default function App({ eggsSSR, raidsSSR }) {
                     max={fim}
                     img={egg.eggImg}
                     gym={egg.ginásio}
+                    gymTeam={egg.equipe}
+                    gymId={egg.id}
                     lat={egg.lat}
                     lon={egg.lon}
+                    pokemonNames={
+                      egg.level == 1 ? level1Names :
+                        egg.level == 3 ? level3Names :
+                          egg.level == 5 ? level5Names :
+                            level6Names}
                   />
                 </Dialog.Root>
 
@@ -484,14 +501,15 @@ export default function App({ eggsSSR, raidsSSR }) {
 
                   <CreateRaidModal
                     level={raid.level}
-                    min={inicio}
-                    max={fim}
+                    min={raid.min}
+                    max={raid.max}
                     img={raid.pokemonImg}
                     gym={raid.ginásio}
                     lat={raid.lat}
                     lon={raid.lon}
                     pokemonName={raid.pokemonName}
                     gymId={raid.id}
+                    gymTeam={raid.equipe}
                   />
                 </Dialog.Root>
 

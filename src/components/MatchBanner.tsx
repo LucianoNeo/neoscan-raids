@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Star } from 'phosphor-react'
 import { useEffect, useState } from 'react'
-
+import { format, toDate, utcToZonedTime } from 'date-fns-tz'
 
 interface MatchBannerProps {
   name: string,
@@ -9,7 +9,7 @@ interface MatchBannerProps {
   bannerUrl: string,
   pokemonImg: string,
   title: string,
-  adsCount: number
+  playersCount: number
   start: string,
   end: string,
   lat: string,
@@ -26,6 +26,13 @@ interface MatchBannerProps {
 export default function MatchBanner(props: MatchBannerProps) {
 
   const [name, setName] = useState('')
+  const dateInicio = toDate(props.start)
+  const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
+  const inicio = format(brasilDateInicio, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
+  const dateFim = toDate(props.end)
+  const brasilDateFim = utcToZonedTime(dateFim, 'America/Sao_Paulo')
+  const fim = format(brasilDateFim, 'HH:mm', { timeZone: 'America/Sao_Paulo' })
+
 
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${props.pokemonId}`).then(response => setName(response.data.name))
@@ -57,16 +64,16 @@ export default function MatchBanner(props: MatchBannerProps) {
 
 
         <span className='text-white block text-sm'>Começa às:</span>
-        <strong className=' block text-sm text-blue-500'>{props.start}</strong>
-        <span className='text-white block text-sm '>Jogadores:</span>
-        <div className='flex gap-2 mt-2 overflow-auto'>
+        <strong className=' block text-sm text-blue-500'>{inicio}</strong>
+        <span className='text-white block text-sm '>{props.playersCount} Jogador (es):</span>
+        <div className='flex gap-2 mt-2 overflow-auto  pr-4'>
           {props.players.map((player, index) =>
           (
 
             <div key={index} className='bg-slate-800 rounded py-1 px-2 h-8 min-w-fit flex items-center justify-center gap-2 mb-1'>
               <img src={player.team == "valor" ? './assets/img/icon-valor.png' : player.team == "instinct" ? './assets/img/icon-instinct.png' : './assets/img/icon-mystic.png'} alt="" width={20} />
-              <span className='text-white text-xs font-extrabold'>{player.username}</span>
-              <span className='text-white text-xs font-bold'>L{player.playerLevel}</span>
+              <span className='text-white text-xs font-extrabold'>{player.username.toUpperCase()}</span>
+              <span className='text-xs font-bold text-white'>L{player.playerLevel}</span>
             </div>
 
           )

@@ -1,6 +1,5 @@
 -- CreateTable
 CREATE TABLE `Raid` (
-    `gymId` VARCHAR(191) NOT NULL,
     `id` VARCHAR(191) NOT NULL,
     `pokemonName` VARCHAR(191) NOT NULL,
     `pokemonImg` VARCHAR(191) NOT NULL,
@@ -19,7 +18,7 @@ CREATE TABLE `Raid` (
 -- CreateTable
 CREATE TABLE `Players` (
     `raidId` VARCHAR(191) NOT NULL,
-    `id` VARCHAR(191) NOT NULL,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(191) NOT NULL,
     `team` VARCHAR(191) NOT NULL,
     `playerLevel` INTEGER NOT NULL,
