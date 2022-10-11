@@ -66,7 +66,7 @@ export default function CreateEggModal(props: modalProps) {
                 team: data.team
             }
 
-            await axios.post(process.env.API_MATCHES, dataFull)
+            await axios.post('https://neoscan-raids.vercel.app/api/matches', dataFull)
 
             alert('Raid agendada com sucesso!')
             location.reload()
