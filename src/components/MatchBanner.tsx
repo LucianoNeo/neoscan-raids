@@ -63,9 +63,9 @@ export default function MatchBanner(props: MatchBannerProps) {
           {props.players.map((player, index) =>
           (
 
-            <div className='bg-slate-800 rounded py-1 px-2 h-8 min-w-fit flex items-center justify-center gap-2 mb-1'>
+            <div key={index} className='bg-slate-800 rounded py-1 px-2 h-8 min-w-fit flex items-center justify-center gap-2 mb-1'>
               <img src={player.team == "valor" ? './assets/img/icon-valor.png' : player.team == "instinct" ? './assets/img/icon-instinct.png' : './assets/img/icon-mystic.png'} alt="" width={20} />
-              <span key={index} className='text-white text-xs font-extrabold'>{player.username}</span>
+              <span className='text-white text-xs font-extrabold'>{player.username}</span>
               <span className='text-white text-xs font-bold'>L{player.playerLevel}</span>
             </div>
 
