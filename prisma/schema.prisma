@@ -6,32 +6,34 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model Raid {
   gymId       String
   id          String   @id @default(uuid())
-  playType    String
   pokemonName String
   pokemonImg  String
   gym         String
   hourStart   DateTime
   hourEnd     DateTime
   createdAt   DateTime @default(now())
-  team        Int
+  gymTeam     Int
   lat         String
   lon         String
-  level       Int
+  raidLevel   Int
 
   players Players[]
 }
 
 model Players {
-  raidId   String
-  id       String @id @default(uuid())
-  username String
+  raidId      String
+  id          String @id @default(uuid())
+  username    String
+  team        String
+  playerLevel Int
+  playType    String
 
   raid Raid @relation(fields: [raidId], references: [id])
 }

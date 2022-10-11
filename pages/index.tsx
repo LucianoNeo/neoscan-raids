@@ -118,14 +118,17 @@ export default function App({ eggsSSR, raidsSSR }) {
     gym: string
     hourStart: string
     hourEnd: string
-    players: [{
-      username: string,
-    }]
     lat: string
     lon: string
-    level: number
-    team: number
+    raidLevel: number
+    gymTeam: number
     pokemonId: number,
+    players: [{
+      username: string,
+      playerLevel: number
+      team: string
+      playType: string
+    }]
   }
 
 
@@ -183,7 +186,7 @@ export default function App({ eggsSSR, raidsSSR }) {
     setEggs(eggsData)
     setRaids(raidsData)
 
-    axios(`https://neoscan-raids.vercel.app/api/matches`)
+    axios(`api/matches`)
       .then(response => {
         setMatches(response.data)
       })
@@ -281,8 +284,8 @@ export default function App({ eggsSSR, raidsSSR }) {
                     <MatchBanner
                       pokemonId={match.pokemonId}
                       name={match.pokemonName}
-                      level={match.level}
-                      bannerUrl={match.team == 1 ? './assets/img/mystic.png' : match.team == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
+                      raidLevel={match.raidLevel}
+                      bannerUrl={match.gymTeam == 1 ? './assets/img/mystic.png' : match.gymTeam == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
                       title={match.gym}
                       adsCount={0}
                       start={inicio}
