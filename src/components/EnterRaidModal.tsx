@@ -45,7 +45,7 @@ export default function CreateRaidModal(props: modalProps) {
                 team: data.team
             }
 
-            await axios.post(`/api/matches`, dataFull)
+            await axios.post(process.env.API_MATCHES, dataFull)
 
             alert('Entrada na Raid confirmada!')
             location.reload()

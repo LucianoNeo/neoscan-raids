@@ -66,7 +66,7 @@ export default function CreateEggModal(props: modalProps) {
                 team: data.team
             }
 
-            await axios.post(`/api/matches`, dataFull)
+            await axios.post(process.env.API_MATCHES, dataFull)
 
             alert('Raid agendada com sucesso!')
             location.reload()

@@ -195,7 +195,7 @@ export default function App({ eggsSSR, raidsSSR }) {
     setEggs(eggsData)
     setRaids(raidsData)
 
-    axios('/api/matches')
+    axios(process.env.API_MATCHES)
       .then(response => {
         setMatches(response.data)
       })
