@@ -14,9 +14,12 @@ interface MatchBannerProps {
   end: string,
   lat: string,
   lon: string,
-  level: number
+  raidLevel: number
   players: [{
     username: string,
+    playerLevel: number
+    team: string
+    playType: string
   }]
 }
 
@@ -35,9 +38,9 @@ export default function MatchBanner(props: MatchBannerProps) {
 
 
       <div className='justify-between w-60 absolute z-10 text-white top-4 text-3xl font-extrabold left-4 '>
-        {props.level == 6 && <h1>MEGA</h1>}
+        {props.raidLevel == 6 && <h1>MEGA</h1>}
         <h1 className='drop-shadow-lg'>{props.name.toUpperCase()}</h1>
-        <h1 className='flex items-center gap-2'>{props.level} <Star weight="fill" color='yellow' /></h1>
+        <h1 className='flex items-center gap-2'>{props.raidLevel} <Star weight="fill" color='yellow' /></h1>
       </div>
 
       <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0 items-center justify-center' >
@@ -56,10 +59,16 @@ export default function MatchBanner(props: MatchBannerProps) {
         <span className='text-white block text-sm'>Começa às:</span>
         <strong className=' block text-sm text-blue-500'>{props.start}</strong>
         <span className='text-white block text-sm '>Jogadores:</span>
-        <div className='flex gap-2 mt-2'>
+        <div className='flex gap-2 mt-2 overflow-auto'>
           {props.players.map((player, index) =>
           (
-            <span key={index} className='text-white text-xs bg-green-700 rounded py-1 px-2 flex items-center justify-center'>{player.username}</span>
+
+            <div key={index} className='bg-slate-800 rounded py-1 px-2 h-8 min-w-fit flex items-center justify-center gap-2 mb-1'>
+              <img src={player.team == "valor" ? './assets/img/icon-valor.png' : player.team == "instinct" ? './assets/img/icon-instinct.png' : './assets/img/icon-mystic.png'} alt="" width={20} />
+              <span className='text-white text-xs font-extrabold'>{player.username}</span>
+              <span className='text-white text-xs font-bold'>L{player.playerLevel}</span>
+            </div>
+
           )
           )}
         </div>
