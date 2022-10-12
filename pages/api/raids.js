@@ -16,7 +16,7 @@ export default function handler(req, res) {
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
         conn.query(
-            'select * from raid left join gymdetails on raid.gym_id = gymdetails.gym_id left join gym on raid.gym_id = gym.gym_id WHERE END >= NOW() + INTERVAL 185 MINUTE && START <= NOW() + INTERVAL 185 MINUTE && pokemon_id IS NOT NULL ORDER BY END;',
+            'select * from raid left join gymdetails on raid.gym_id = gymdetails.gym_id left join gym on raid.gym_id = gym.gym_id WHERE END >= NOW() + INTERVAL 185 MINUTE && START <= NOW() + INTERVAL 185 MINUTE && pokemon_id IS NOT NULL ORDER BY END DESC;',
             async (error, result, field) => {
                 conn.release()
                 if (error) { return res.status(500).send({ error: error }) }
