@@ -67,7 +67,7 @@ export default function CreateRaidModal(props: modalProps) {
                 team: data.team
             }
             console.log(dataFull)
-            await axios.post(process.env.API_MATCHES, dataFull)
+            await axios.post('/api/matches', dataFull)
 
             alert('Raid agendada com sucesso!')
 
