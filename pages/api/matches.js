@@ -6,6 +6,11 @@ const prisma = new PrismaClient(/*{log: ['query']}*/)
 export default async function handler(req, res) {
     if (req.method === 'GET') {
         const matches = await prisma.raid.findMany({
+            where: {
+                hourStart: {
+                    gte: new Date()
+                }
+            },
             include: {
                 players: {
 

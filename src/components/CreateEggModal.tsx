@@ -52,7 +52,7 @@ export default function CreateEggModal(props: modalProps) {
             const dataFull = {
                 username: data.username,
                 playType: data.playType,
-                hourStart: new Date(2022, 11, 10),
+                hourStart: new Date(data.hourStart.toString()),
                 hourEnd: new Date(2022, 11, 10),
                 raidLevel: props.level,
                 pokemonImg: props.img,

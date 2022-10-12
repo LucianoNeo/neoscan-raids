@@ -5,6 +5,8 @@ import { Check, GameController } from 'phosphor-react'
 import Input from './Form/Input'
 import { useEffect, useState, FormEvent } from 'react'
 import axios from 'axios'
+import { format, toDate, utcToZonedTime } from 'date-fns-tz'
+
 
 interface modalProps {
     min: string
@@ -34,7 +36,8 @@ export default function CreateRaidModal(props: modalProps) {
 
 
     const [games, setGames] = useState<Game[]>([])
-
+    const brasilDateInicio = utcToZonedTime(props.min, 'America/Sao_Paulo')
+    const inicio = format(brasilDateInicio, 'dd/MM/yyyy HH:mm', { timeZone: 'America/Sao_Paulo' })
 
     async function handleCreateAd(e: FormEvent) {
         e.preventDefault()
@@ -42,6 +45,10 @@ export default function CreateRaidModal(props: modalProps) {
         const formData = new FormData(e.target as HTMLFormElement)
 
         const data = Object.fromEntries(formData)
+
+
+
+
 
         if (!data.username) {
             return alert('Você deve preencher todos os campos!')
@@ -53,8 +60,8 @@ export default function CreateRaidModal(props: modalProps) {
             const dataFull = {
                 username: data.username,
                 playType: data.playType,
-                hourStart: new Date(2022, 11, 10),
-                hourEnd: new Date(2022, 11, 10),
+                hourStart: new Date(data.hourStart.toString()),
+                hourEnd: props.max,
                 raidLevel: props.level,
                 pokemonImg: props.img,
                 pokemonId: props.pokemonId,
@@ -178,7 +185,7 @@ export default function CreateRaidModal(props: modalProps) {
                         <div className='flex flex-col gap-2 items-center justify-center'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
 
-                            <Input type="time" name="hourStart" id="hourStart" min={props.min} max={props.max} />
+                            <Input type="datetime-local" name="hourStart" id="hourStart" min={props.min} max={props.max} />
 
 
                         </div>

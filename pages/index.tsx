@@ -470,8 +470,8 @@ export default function App({ eggsSSR, raidsSSR }) {
 
                   <CreateRaidModal
                     level={raid.level}
-                    min={raid.min}
-                    max={raid.max}
+                    min={raid.inicio}
+                    max={raid.fim}
                     img={raid.pokemonImg}
                     gym={raid.ginásio}
                     lat={raid.lat}
