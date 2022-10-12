@@ -236,40 +236,7 @@ export default function App({ eggsSSR, raidsSSR }) {
       <div className='flex flex-col gap-6 items-center justify-center w-full'>
         <div className='flex bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
           <h1 className='text-white font-bold'>PARTIDAS AGENDADAS:</h1>
-          <div className='flex'>
-            <input type="text" placeholder='Digite o nome do ginásio para pesquisar'
-              value={eggSearch} onChange={e => setEggSearch(e.target.value.toLowerCase())}
-              className='bg-slate-900 p-2 rounded text-white md:w-80' />
-          </div>
-          <div className='flex gap-3 items-center'>
 
-            <h1 className='text-white'>FILTROS:</h1>
-            <div className='text-white text-xs grid  grid-cols-2 gap-1 flex-wrap'>
-              <div className='gap-2 flex'>
-                <label htmlFor="level1">Level 1</label>
-                <input type="checkbox" name="level1" id="1" checked={eggsLevel.has(1)}
-                  onChange={() => handleEggLevel(1)} />
-              </div>
-              <div className='gap-2 flex'>
-                <label htmlFor="level3">Level 3</label>
-                <input type="checkbox" name="level3" id="3" checked={eggsLevel.has(3)}
-                  onChange={() => handleEggLevel(3)} />
-              </div>
-              <div className='gap-2 flex'>
-                <label htmlFor="level5">Level 5</label>
-                <input type="checkbox" name="level3" id="3" checked={eggsLevel.has(5)}
-                  onChange={() => handleEggLevel(5)} />
-              </div>
-              <div className='gap-2 flex'>
-                <label htmlFor="level6">Mega Raids</label>
-                <input type="checkbox" name="level6" id="6" checked={eggsLevel.has(6)}
-                  onChange={() => handleEggLevel(6)} />
-              </div>
-
-
-
-            </div>
-          </div>
         </div>
         {matches ?
           <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>

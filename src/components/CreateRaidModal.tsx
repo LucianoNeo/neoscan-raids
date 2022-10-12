@@ -68,7 +68,7 @@ export default function CreateRaidModal(props: modalProps) {
             }
             console.log(dataFull)
             await axios.post('/api/matches', dataFull)
-
+            location.reload()
             alert('Raid agendada com sucesso!')
 
         } catch (error) {
@@ -140,8 +140,8 @@ export default function CreateRaidModal(props: modalProps) {
                                     <option disabled selected value=''>
                                         Seu estilo de jogo
                                     </option>
-                                    <option>Presencial</option>
-                                    <option>Remoto</option>
+                                    <option>🚶‍♂️</option>
+                                    <option>✈</option>
                                 </select>
 
                             </div>

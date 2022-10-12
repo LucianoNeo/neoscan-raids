@@ -119,8 +119,8 @@ export default function CreateRaidModal(props: modalProps) {
                                     <option disabled selected value=''>
                                         Seu estilo de jogo
                                     </option>
-                                    <option>Presencial</option>
-                                    <option>Remoto</option>
+                                    <option>🚶‍♂️</option>
+                                    <option>✈</option>
                                 </select>
 
                             </div>

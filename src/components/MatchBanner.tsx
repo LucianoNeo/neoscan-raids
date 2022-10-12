@@ -51,17 +51,12 @@ export default function MatchBanner(props: MatchBannerProps) {
       </div>
 
       <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0 items-center justify-center' >
-        <img src={props.pokemonImg} alt="" className='w-52 left-8 bottom-36 absolute z-1' />
+
         <span className='text-white block text-sm  z-10'>Ginásio:</span>
         {/* <a className='flex gap-3 items-center' href={`https://www.google.com/maps/search/?api=1&query=${props.lat},${props.lon}`} target='_blank'>
           <MapTrifold size={32} weight="bold" color='white' /> */}
-        <p className='text-white font-bold truncate ...'>{props.title}</p>
-
-
-
-
-
-
+        <p className='text-white font-bold truncate ... z-auto'>{props.title}</p>
+        <img src={props.pokemonImg} alt="" className='w-52 left-8 bottom-36 absolute' />
 
         <span className='text-white block text-sm'>Começa às:</span>
         <strong className=' block text-sm text-blue-500'>{inicio}</strong>
@@ -72,6 +67,7 @@ export default function MatchBanner(props: MatchBannerProps) {
 
             <div key={index} className='bg-slate-800 rounded py-1 px-2 h-8 min-w-fit flex items-center justify-center gap-2 mb-1'>
               <img src={player.team == "valor" ? './assets/img/icon-valor.png' : player.team == "instinct" ? './assets/img/icon-instinct.png' : './assets/img/icon-mystic.png'} alt="" width={20} />
+              <span>{player.playType}</span>
               <span className='text-white text-xs font-extrabold'>{player.username.toUpperCase()}</span>
               <span className='text-xs font-bold text-white'>L{player.playerLevel}</span>
             </div>
