@@ -195,7 +195,7 @@ export default function App({ eggsSSR, raidsSSR }) {
     setEggs(eggsData)
     setRaids(raidsData)
 
-    axios('https://neoscan-raids.vercel.app/api/matches')
+    axios('http://localhost:3000/api/matches')
       .then(response => {
         setMatches(response.data)
       })
