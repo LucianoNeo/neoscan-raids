@@ -78,6 +78,7 @@ export default function CreateRaidModal(props: modalProps) {
             }
             console.log(dataFull)
             await axios.post('/api/matches', dataFull)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             location.reload()
             alert('Raid agendada com sucesso!')
 

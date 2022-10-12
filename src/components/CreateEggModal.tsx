@@ -72,6 +72,7 @@ export default function CreateEggModal(props: modalProps) {
             await axios.post('/api/matches', dataFull)
 
             alert('Raid agendada com sucesso!')
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             location.reload()
         } catch (error) {
             console.log(error)

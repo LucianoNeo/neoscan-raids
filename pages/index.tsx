@@ -453,7 +453,10 @@ export default function App({ eggsSSR, raidsSSR }) {
         </div>
         {filtered ?
 
-          <Carousel breakPoints={breakpoints} isRTL={false}>
+          <Carousel
+
+            breakPoints={breakpoints}
+            isRTL={false}>
             {filtered.map(raid => {
               const dateInicio = toDate(raid.inicio)
               const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
