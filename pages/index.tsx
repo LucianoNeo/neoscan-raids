@@ -82,7 +82,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const matchesData = useSWR('/api/matches', getMatches,
     {
-      refreshInterval: 3000,
+      refreshInterval: 60000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
     }
