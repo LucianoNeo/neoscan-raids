@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const raidsResponse = await raidsData.data
   const raidsSSR = raidsResponse.response.raids
 
-  const matchesData = await axios(process.env.API_MATCHES)
+  const matchesData = await axios('/api/matches')
   const matchesResponse = await matchesData.data
   const matchesSSR = matchesResponse
 
@@ -84,7 +84,7 @@ export default function App({ eggsSSR, raidsSSR, matchesSSR }) {
     }
   ).data
 
-  const matchesData = useSWR('http://neoscan-raids.vercel.app/api/matches', getMatches,
+  const matchesData = useSWR('/api/matches', getMatches,
     {
       refreshInterval: 30000,
       revalidateIfStale: true,
