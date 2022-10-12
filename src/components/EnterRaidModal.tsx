@@ -3,6 +3,7 @@ import axios from 'axios'
 import { GameController, CopySimple } from 'phosphor-react'
 import { FormEvent, useEffect, useState } from 'react'
 import { setTimeout } from 'timers'
+import { toast } from 'react-toastify'
 
 import Input from './Form/Input'
 
@@ -41,7 +42,7 @@ export default function EnterRaidModal(props: modalProps) {
         const data = Object.fromEntries(formData)
 
         if (!data.username || !data.playType || !data.playerLevel || !data.team) {
-            return alert('Você deve preencher todos os campos!')
+            return toast.error('Você deve preencher todos os campos!')
         }
 
         try {
@@ -59,11 +60,11 @@ export default function EnterRaidModal(props: modalProps) {
 
             await axios.post('/api/matches', dataFull)
 
-            alert('Entrada na Raid confirmada!')
+            toast.success('Entrada na Raid confirmada!')
             location.reload()
         } catch (error) {
             console.log(error)
-            alert('Erro ao criar agendamento!')
+            toast.error('Erro ao criar agendamento!')
         }
 
 
@@ -110,7 +111,9 @@ export default function EnterRaidModal(props: modalProps) {
                             <a href="#" className='flex items-center gap-1 mt-4 hover:text-blue-500'
                                 onClick={() => {
                                     navigator.clipboard.writeText(`${props.lat},${props.lon}`)
-                                    showBaloon()
+
+                                    toast.success('Coordenadas copiadas!')
+                                    //showBaloon()
                                 }}
                             >
                                 <span className='text-xs underline '>Copiar Coordenadas</span>

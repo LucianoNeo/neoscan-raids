@@ -6,6 +6,7 @@ import Input from './Form/Input'
 import { useEffect, useState, FormEvent } from 'react'
 import axios from 'axios'
 import { format, toDate, utcToZonedTime } from 'date-fns-tz'
+import { toast } from 'react-toastify'
 
 
 interface modalProps {
@@ -52,7 +53,7 @@ export default function CreateRaidModal(props: modalProps) {
 
         if (!data.username || !data.playType || !data.playerLevel || !data.team ||
             !data.hourStart) {
-            return alert('Você deve preencher todos os campos!')
+            return toast.error('Você deve preencher todos os campos!')
         }
 
         try {
@@ -80,11 +81,11 @@ export default function CreateRaidModal(props: modalProps) {
             await axios.post('/api/matches', dataFull)
             window.scrollTo({ top: 0, behavior: 'smooth' });
             location.reload()
-            alert('Raid agendada com sucesso!')
+            toast.success('Raids agendada com sucesso!')
 
         } catch (error) {
             console.log(error)
-            alert('Erro ao criar agendamento!')
+            toast.error('Erro ao criar agendamento!')
         }
 
 

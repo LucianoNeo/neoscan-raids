@@ -5,6 +5,8 @@ import { Check, GameController } from 'phosphor-react'
 import Input from './Form/Input'
 import { useEffect, useState, FormEvent } from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify'
+
 
 interface modalProps {
     min: string
@@ -46,7 +48,7 @@ export default function CreateEggModal(props: modalProps) {
 
         if (!data.username || !data.playType || !data.playerLevel || !data.team ||
             !data.hourStart || !data.pokemon) {
-            return alert('Você deve preencher todos os campos!')
+            return toast.error('Você deve preencher todos os campos!')
         }
 
         try {
@@ -71,12 +73,12 @@ export default function CreateEggModal(props: modalProps) {
             console.log(dataFull)
             await axios.post('/api/matches', dataFull)
 
-            alert('Raid agendada com sucesso!')
+            toast.success('Raid agendada com sucesso!')
             window.scrollTo({ top: 0, behavior: 'smooth' });
             location.reload()
         } catch (error) {
             console.log(error)
-            alert('Erro ao criar agendamento!')
+            toast.error('Erro ao criar agendamento!')
         }
 
 
