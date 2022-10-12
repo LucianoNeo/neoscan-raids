@@ -101,7 +101,7 @@ export default function EnterRaidModal(props: modalProps) {
                             <h1 className='font-bold'>{props.gym}</h1>
                         </div>
                         <div className='flex flex-col'>
-                            <a href={`https://www.google.com/maps/search/?api=1&query=${props.lat},${props.lon}`} target='_blank'>
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${props.lat},${props.lon}`} target='_blank' rel="noreferrer">
                                 <img src={map} alt="" width={200} className='rounded-lg' />
                             </a>
                             <a href="#" className='flex items-center gap-1 mt-4 hover:text-blue-500'
