@@ -84,7 +84,7 @@ export default function App({ eggsSSR, raidsSSR, matchesSSR }) {
     }
   ).data
 
-  const matchesData = useSWR('/api/matches', getMatches,
+  const matchesData = useSWR('http://neoscan-raids.vercel.app/api/matches', getMatches,
     {
       refreshInterval: 30000,
       revalidateIfStale: true,
