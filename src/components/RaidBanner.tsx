@@ -33,7 +33,7 @@ export default function RaidBanner(props: RaidBannerProps) {
 
       <div className='justify-between w-60 absolute z-10 text-white top-4 text-3xl font-extrabold left-4 '>
         {props.level == 6 && <h1>MEGA</h1>}
-        <h1 className='drop-shadow-lg'>{props.name.toUpperCase()}</h1>
+        <h1 className='drop-shadow-lg truncate'>{props.name.toUpperCase()}</h1>
         <h1 className='flex items-center gap-2'>{props.level} <Star weight="fill" color='yellow' /></h1>
       </div>
 
@@ -42,7 +42,7 @@ export default function RaidBanner(props: RaidBannerProps) {
         <span className='text-white block text-sm  z-10'>Ginásio:</span>
         {/* <a className='flex gap-3 items-center' href={`https://www.google.com/maps/search/?api=1&query=${props.lat},${props.lon}`} target='_blank'>
           <MapTrifold size={32} weight="bold" color='white' /> */}
-        <p className='text-white font-bold truncate ...'>{props.title}</p>
+        <p className='text-white font-bold truncate'>{props.title}</p>
 
 
 

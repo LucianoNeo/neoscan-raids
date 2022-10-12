@@ -46,7 +46,7 @@ export default function MatchBanner(props: MatchBannerProps) {
 
       <div className='justify-between w-60 absolute z-10 text-white top-4 text-3xl font-extrabold left-4 '>
         {props.raidLevel == 6 && <h1>MEGA</h1>}
-        <h1 className='drop-shadow-lg'>{props.name.toUpperCase()}</h1>
+        <h1 className='drop-shadow-lg truncate'>{props.name.toUpperCase()}</h1>
         <h1 className='flex items-center gap-2'>{props.raidLevel} <Star weight="fill" color='yellow' /></h1>
       </div>
 

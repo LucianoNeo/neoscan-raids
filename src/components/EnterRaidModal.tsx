@@ -1,7 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
-import { GameController } from 'phosphor-react'
+import { GameController, CopySimple } from 'phosphor-react'
 import { FormEvent, useEffect, useState } from 'react'
+import { setTimeout } from 'timers'
+
 import Input from './Form/Input'
 
 interface modalProps {
@@ -22,6 +24,14 @@ interface modalProps {
 
 export default function EnterRaidModal(props: modalProps) {
     const [map, setMap] = useState<string>()
+    const [baloon, setBalloon] = useState<boolean>(false)
+
+    function showBaloon() {
+        setBalloon(true)
+        setTimeout(() => {
+            setBalloon(false)
+        }, 1000);
+    }
 
     async function handleCreateAd(e: FormEvent) {
         e.preventDefault()
@@ -78,6 +88,11 @@ export default function EnterRaidModal(props: modalProps) {
 
                 <Dialog.Title className='text-3xl font-black'>Participar desta Raid</Dialog.Title>
                 <form className='flex flex-col gap-4' onSubmit={handleCreateAd}>
+                    <div className={`absolute bg-slate-50 w-36 h-8 rounded-xl opacity-90 right-10 top-[260px] ${baloon ? 'flex' : 'hidden'} flex items-center justify-center transition-all`}>
+                        <span className='text-xs text-blue-600 font-semibold'>
+                            Copiado com sucesso!
+                        </span>
+                    </div>
                     <div className=' my-4 flex items-center justify-start gap-2'>
                         <img src={props.img} alt="" width={100} height={100} />
                         <div className='p-2 w-[50%]'>
@@ -85,8 +100,20 @@ export default function EnterRaidModal(props: modalProps) {
                             <span>Ginásio: </span>
                             <h1 className='font-bold'>{props.gym}</h1>
                         </div>
-                        <div className='bg-orange-700 w-40 h-40'>
-                            <img src={map} alt="" />
+                        <div className='flex flex-col'>
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${props.lat},${props.lon}`} target='_blank'>
+                                <img src={map} alt="" width={200} className='rounded-lg' />
+                            </a>
+                            <a href="#" className='flex items-center gap-1 mt-4 hover:text-blue-500'
+                                onClick={() => {
+                                    navigator.clipboard.writeText(`${props.lat},${props.lon}`)
+                                    showBaloon()
+                                }}
+                            >
+                                <span className='text-xs underline '>Copiar Coordenadas</span>
+                                <CopySimple size={22} color="white" weight="fill" />
+                            </a>
+
 
                         </div>
                     </div>
