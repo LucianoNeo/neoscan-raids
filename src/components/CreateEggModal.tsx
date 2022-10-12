@@ -14,6 +14,7 @@ interface modalProps {
     gym: string,
     lat: string,
     lon: string,
+    pokemonId: number,
     pokemonNames: any,
     gymId: string,
     gymTeam: string
@@ -55,6 +56,7 @@ export default function CreateEggModal(props: modalProps) {
                 hourEnd: new Date(2022, 11, 10),
                 raidLevel: props.level,
                 pokemonImg: props.img,
+                pokemonId: props.pokemonId,
                 pokemonName: data.pokemon,
                 gym: props.gym,
                 id: props.gymId,

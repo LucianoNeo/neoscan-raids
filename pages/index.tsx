@@ -280,6 +280,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                     lat={match.lat}
                     lon={match.lon}
                     pokemonName={match.pokemonName}
+                    pokemonId={match.pokemonId}
                     gymId={match.id}
                     gymTeam={match.gymTeam}
                   />
@@ -371,6 +372,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                     gymId={egg.id}
                     lat={egg.lat}
                     lon={egg.lon}
+                    pokemonId={0}
                     pokemonNames={
                       egg.level == 1 ? level1Names :
                         egg.level == 3 ? level3Names :
@@ -475,6 +477,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                     lat={raid.lat}
                     lon={raid.lon}
                     pokemonName={raid.pokemonName}
+                    pokemonId={raid.pokemonId}
                     gymId={raid.id}
                     gymTeam={raid.equipe}
                   />

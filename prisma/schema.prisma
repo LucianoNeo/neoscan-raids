@@ -13,6 +13,7 @@ datasource db {
 model Raid {
   id          String   @id
   pokemonName String
+  pokemonId   Int
   pokemonImg  String
   gym         String
   hourStart   DateTime

@@ -2,10 +2,12 @@ const mysql = require('./mysql').poolRaidsctba
 const axios = require('axios');
 
 async function getName(id) {
-    if (id) {
+    if (id && id !== undefined) {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
         const pokename = await response.data.name;
         return pokename
+    } else {
+        return 'desconhecido'
     }
 }
 

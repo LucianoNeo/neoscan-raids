@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
 import { GameController } from 'phosphor-react'
-import { FormEvent, useEffect } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import Input from './Form/Input'
 
 interface modalProps {
@@ -13,13 +13,15 @@ interface modalProps {
     lat: string,
     lon: string,
     pokemonName: string,
+    pokemonId: number,
     gymId: string,
     gymTeam: number
 }
 
 
-export default function CreateRaidModal(props: modalProps) {
 
+export default function EnterRaidModal(props: modalProps) {
+    const [map, setMap] = useState<string>()
 
     async function handleCreateAd(e: FormEvent) {
         e.preventDefault()
@@ -61,11 +63,11 @@ export default function CreateRaidModal(props: modalProps) {
 
 
     useEffect(() => {
+        setMap(`https://tileserver.neoscan.com.br/staticmap/pokemon?id=${props.pokemonId}&lat=${props.lat}&lon=${props.lon}`)
 
     }, [])
 
-
-
+    console.log(map)
     return (
 
         <Dialog.Portal>
@@ -73,6 +75,7 @@ export default function CreateRaidModal(props: modalProps) {
             />
             <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-black/25 z-20'
             >
+
                 <Dialog.Title className='text-3xl font-black'>Participar desta Raid</Dialog.Title>
                 <form className='flex flex-col gap-4' onSubmit={handleCreateAd}>
                     <div className=' my-4 flex items-center justify-start gap-2'>
@@ -82,7 +85,10 @@ export default function CreateRaidModal(props: modalProps) {
                             <span>Ginásio: </span>
                             <h1 className='font-bold'>{props.gym}</h1>
                         </div>
+                        <div className='bg-orange-700 w-40 h-40'>
+                            <img src={map} alt="" />
 
+                        </div>
                     </div>
 
 
@@ -113,10 +119,10 @@ export default function CreateRaidModal(props: modalProps) {
                         <div className='w-full flex items-center justify-between'>
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='playType'>Como vai participar?</label>
-                                <select
+                                <select defaultValue='Seu estilo de jogo'
                                     className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500 w-48'
                                     id='playType' name='playType'>
-                                    <option disabled selected value=''>
+                                    <option disabled >
                                         Seu estilo de jogo
                                     </option>
                                     <option>🚶‍♂️</option>
@@ -127,10 +133,10 @@ export default function CreateRaidModal(props: modalProps) {
 
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='team'>Qual a sua equipe?</label>
-                                <select
+                                <select defaultValue='Selecione sua equipe'
                                     className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
                                     id='team' name='team'>
-                                    <option disabled selected value=''>
+                                    <option disabled >
                                         Selecione sua equipe
                                     </option>
                                     <option value='valor'>

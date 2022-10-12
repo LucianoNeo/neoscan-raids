@@ -2,6 +2,7 @@
 CREATE TABLE `Raid` (
     `id` VARCHAR(191) NOT NULL,
     `pokemonName` VARCHAR(191) NOT NULL,
+    `pokemonId` INTEGER NOT NULL,
     `pokemonImg` VARCHAR(191) NOT NULL,
     `gym` VARCHAR(191) NOT NULL,
     `hourStart` DATETIME(3) NOT NULL,

@@ -1,8 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient({
-    log: ['query']
-})
+const prisma = new PrismaClient(/*{log: ['query']}*/)
 
 
 export default async function handler(req, res) {
@@ -32,6 +30,7 @@ export default async function handler(req, res) {
                     hourEnd: body.hourEnd,
                     raidLevel: body.raidLevel,
                     pokemonImg: body.pokemonImg,
+                    pokemonId: body.pokemonId,
                     pokemonName: body.pokemonName,
                     gym: body.gym,
                     gymTeam: body.gymTeam,

@@ -15,6 +15,7 @@ interface modalProps {
     lat: string,
     lon: string,
     pokemonName: string,
+    pokemonId: number,
     gymId: string,
     gymTeam: number
 }
@@ -56,6 +57,7 @@ export default function CreateRaidModal(props: modalProps) {
                 hourEnd: new Date(2022, 11, 10),
                 raidLevel: props.level,
                 pokemonImg: props.img,
+                pokemonId: props.pokemonId,
                 pokemonName: props.pokemonName,
                 gym: props.gym,
                 id: props.gymId,
