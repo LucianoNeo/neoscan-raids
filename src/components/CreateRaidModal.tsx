@@ -50,7 +50,8 @@ export default function CreateRaidModal(props: modalProps) {
 
 
 
-        if (!data.username) {
+        if (!data.username || !data.playType || !data.playerLevel || !data.team ||
+            !data.hourStart) {
             return alert('Você deve preencher todos os campos!')
         }
 
@@ -60,8 +61,8 @@ export default function CreateRaidModal(props: modalProps) {
             const dataFull = {
                 username: data.username,
                 playType: data.playType,
-                hourStart: new Date(data.hourStart.toString()),
-                hourEnd: props.max,
+                hourStart: new Date(Date.prototype.setHours.apply(new Date(), data.hourStart.toString().split(':'))),
+                hourEnd: new Date(Date.prototype.setHours.apply(new Date(), props.max.toString().split(':'))),
                 raidLevel: props.level,
                 pokemonImg: props.img,
                 pokemonId: props.pokemonId,
@@ -181,11 +182,17 @@ export default function CreateRaidModal(props: modalProps) {
 
                     </div>
 
-                    <div className='flex w-full items-center justify-center'>
+                    <div className='flex w-full justify-between'>
+                        <div className='flex flex-col'>
+                            <span className='text-white block'>Começou:</span>
+                            <strong className=' block text-sm text-blue-500'>{props.min}</strong>
+                            <span className='text-white block'> Termina:</span>
+                            <strong className='text-red-600 block'>{props.max}</strong>
+                        </div>
                         <div className='flex flex-col gap-2 items-center justify-center'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
 
-                            <Input type="datetime-local" name="hourStart" id="hourStart" min={props.min} max={props.max} />
+                            <Input type="time" name="hourStart" id="hourStart" min={props.min} max={props.max} />
 
 
                         </div>

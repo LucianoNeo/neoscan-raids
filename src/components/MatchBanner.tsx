@@ -58,7 +58,7 @@ export default function MatchBanner(props: MatchBannerProps) {
         <p className='text-white font-bold truncate ... z-auto'>{props.title}</p>
         <img src={props.pokemonImg} alt="" className='w-52 left-8 bottom-36 absolute' />
 
-        <span className='text-white block text-sm'>Começa às:</span>
+        <span className='text-white block text-sm'>Marcada para:</span>
         <strong className=' block text-sm text-blue-500'>{inicio}</strong>
         <span className='text-white block text-sm '>{props.playersCount} Jogador (es):</span>
         <div className='flex gap-2 mt-2 overflow-auto  pr-4'>

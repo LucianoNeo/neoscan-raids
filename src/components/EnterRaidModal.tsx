@@ -40,7 +40,7 @@ export default function EnterRaidModal(props: modalProps) {
 
         const data = Object.fromEntries(formData)
 
-        if (!data.username) {
+        if (!data.username || !data.playType || !data.playerLevel || !data.team) {
             return alert('Você deve preencher todos os campos!')
         }
 
@@ -77,7 +77,6 @@ export default function EnterRaidModal(props: modalProps) {
 
     }, [])
 
-    console.log(map)
     return (
 
         <Dialog.Portal>
@@ -94,7 +93,11 @@ export default function EnterRaidModal(props: modalProps) {
                         </span>
                     </div>
                     <div className=' my-4 flex items-center justify-start gap-2'>
-                        <img src={props.img} alt="" width={100} height={100} />
+                        <div className='flex flex-col items-center text-center'>
+                            <img src={props.img} alt="" width={150} height={150} />
+                            <span className='text-xs'>Marcado para:</span>
+                            <strong className='text-red-700'>{props.min}</strong>
+                        </div>
                         <div className='p-2 w-[50%]'>
                             <h1 className='font-bold text-blue-500'>{props.pokemonName.toUpperCase()}</h1>
                             <span>Ginásio: </span>

@@ -44,7 +44,8 @@ export default function CreateEggModal(props: modalProps) {
 
         const data = Object.fromEntries(formData)
 
-        if (!data.username) {
+        if (!data.username || !data.playType || !data.playerLevel || !data.team ||
+            !data.hourStart || !data.pokemon) {
             return alert('Você deve preencher todos os campos!')
         }
 
@@ -52,7 +53,7 @@ export default function CreateEggModal(props: modalProps) {
             const dataFull = {
                 username: data.username,
                 playType: data.playType,
-                hourStart: new Date(data.hourStart.toString()),
+                hourStart: new Date(Date.prototype.setHours.apply(new Date(), data.hourStart.toString().split(':'))),
                 hourEnd: new Date(2022, 11, 10),
                 raidLevel: props.level,
                 pokemonImg: props.img,
@@ -67,7 +68,7 @@ export default function CreateEggModal(props: modalProps) {
                 lon: `${props.lon}`,
                 team: data.team
             }
-
+            console.log(dataFull)
             await axios.post('/api/matches', dataFull)
 
             alert('Raid agendada com sucesso!')
@@ -196,7 +197,12 @@ export default function CreateEggModal(props: modalProps) {
 
                     </div>
 
-                    <div className='flex w-full items-center justify-center'>
+                    <div className='flex w-full justify-between'>
+                        <div className='flex flex-col'>
+                            <span className='text-white block'>Abre:</span>
+                            <strong className=' block text-blue-500'>{props.min}</strong>
+
+                        </div>
                         <div className='flex flex-col gap-2 items-center justify-center'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
 

@@ -27,9 +27,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const raidsResponse = await raidsData.data
   const raidsSSR = raidsResponse.response.raids
 
+  const matchesData = await axios(process.env.API_MATCHES)
+  const matchesResponse = await matchesData.data
+  const matchesSSR = matchesResponse
 
   return {
-    props: { eggsSSR, raidsSSR },
+    props: { eggsSSR, raidsSSR, matchesSSR },
     revalidate: 60,
   }
 
@@ -38,7 +41,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 
-export default function App({ eggsSSR, raidsSSR }) {
+export default function App({ eggsSSR, raidsSSR, matchesSSR }) {
 
   async function getRaids(url) {
     const raidsData = await axios(url);
@@ -52,6 +55,13 @@ export default function App({ eggsSSR, raidsSSR }) {
     const raidsResponse = await raidsData.data
     const raidsSWR = raidsResponse.response.eggs
     return raidsSWR
+  }
+
+  async function getMatches(url) {
+    const matchesData = await axios(url);
+    const matchesResponse = await matchesData.data
+    const matchesSWR = matchesResponse
+    return matchesSWR
   }
 
 
@@ -71,6 +81,15 @@ export default function App({ eggsSSR, raidsSSR }) {
       revalidateIfStale: true,
       refreshWhenOffline: true,
       fallbackData: eggsSSR
+    }
+  ).data
+
+  const matchesData = useSWR(process.env.API_MATCHES, getMatches,
+    {
+      refreshInterval: 30000,
+      revalidateIfStale: true,
+      refreshWhenOffline: true,
+      fallbackData: matchesSSR
     }
   ).data
 
@@ -151,8 +170,8 @@ export default function App({ eggsSSR, raidsSSR }) {
   const [search, setSearch] = useState('')
   const [eggSearch, setEggSearch] = useState('')
   const [filter, setFilter] = useState('pokemon')
-  const [raidsLevel, setRaidsLevel] = useState(new Set([5, 6]))
-  const [eggsLevel, setEggsLevel] = useState(new Set([5, 6]))
+  const [raidsLevel, setRaidsLevel] = useState(new Set([1, 3, 5, 6]))
+  const [eggsLevel, setEggsLevel] = useState(new Set([1, 3, 5, 6]))
 
   let filtered
   let eggsFiltered
@@ -194,13 +213,14 @@ export default function App({ eggsSSR, raidsSSR }) {
   useEffect(() => {
     setEggs(eggsData)
     setRaids(raidsData)
+    setMatches(matchesData)
+    // axios('/api/matches')
+    //   .then(response => {
 
-    axios('/api/matches')
-      .then(response => {
-        setMatches(response.data)
-      })
+    //   })
 
-  }, [raidsData, eggsData])
+    console.log(matchesData)
+  }, [raidsData, eggsData, matchesData])
 
 
 
@@ -273,7 +293,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                   </Dialog.Trigger>
                   <EnterRaidModal
                     level={match.raidLevel}
-                    min={match.hourStart}
+                    min={inicio}
                     max={match.hourEnd}
                     img={match.pokemonImg}
                     gym={match.gym}
@@ -470,8 +490,8 @@ export default function App({ eggsSSR, raidsSSR }) {
 
                   <CreateRaidModal
                     level={raid.level}
-                    min={raid.inicio}
-                    max={raid.fim}
+                    min={inicio}
+                    max={fim}
                     img={raid.pokemonImg}
                     gym={raid.ginásio}
                     lat={raid.lat}

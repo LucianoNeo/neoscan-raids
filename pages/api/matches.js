@@ -15,6 +15,9 @@ export default async function handler(req, res) {
                 players: {
 
                 }
+            },
+            orderBy: {
+                hourStart: 'asc'
             }
         })
         return res.status(200).send(res.json(matches))
