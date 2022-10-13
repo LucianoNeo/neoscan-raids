@@ -6,7 +6,7 @@ export default function Input(props: InputProps) {
     return (
         <input
             {...props}
-            className='bg-zinc-900 rounded py-2.5 px-4 text-sm placeholder:text-zinc-500 w-48'
+            className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
             id='game'
             autoComplete='off'
         />

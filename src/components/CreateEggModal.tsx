@@ -106,20 +106,20 @@ export default function CreateEggModal(props: modalProps) {
         <Dialog.Portal>
             <Dialog.Overlay className='bg-black/60 inset-0 fixed'
             />
-            <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-black/25 z-20'
+            <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg md:w-[480px] shadow-black/25 z-20 overflow-hidden w-[95%] '
             >
-                <Dialog.Title className='text-3xl font-black'>Agende uma Raid</Dialog.Title>
+                <Dialog.Title className='md:text-3xl text-5xl font-black'>Agende uma Raid</Dialog.Title>
                 <form className='flex flex-col gap-4' onSubmit={handleCreateAd}>
                     <div className=' my-4 flex items-center justify-start gap-2'>
-                        <img src={props.img} alt="" width={50} height={50} />
-                        <div className='p-2 w-[50%]'>
+                        <img src={props.img} alt="" className='md:w-[150px]' />
+                        <div className='p-2 w-[50%] md:text-xs text-3xl'>
                             <h1 className='font-bold'>Ovo Level {props.level}</h1>
                             <span>Ginásio: </span>
                             <h1 className='font-bold'>{props.gym}</h1>
                         </div>
                         <div className=''>
                             <select
-                                className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500 w-36'
+                                className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-52'
                                 id='pokemon' name='pokemon'>
                                 <option disabled selected value=''>
                                     Pokémon?
@@ -136,7 +136,7 @@ export default function CreateEggModal(props: modalProps) {
 
 
 
-                    <div className='flex items-center w-full flex-col'>
+                    <div className='flex items-center w-full flex-col md:text-xs text-3xl'>
 
                         <div className='w-full flex items-center justify-between'>
                             <div className='gap-2 flex flex-col'>
@@ -163,7 +163,7 @@ export default function CreateEggModal(props: modalProps) {
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='playType'>Como vai participar?</label>
                                 <select
-                                    className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500 w-48'
+                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
                                     id='playType' name='playType'>
                                     <option disabled selected value=''>
                                         Seu estilo de jogo
@@ -177,7 +177,7 @@ export default function CreateEggModal(props: modalProps) {
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='team'>Qual a sua equipe?</label>
                                 <select
-                                    className='bg-zinc-900 rounded py-3 px-4 text-sm placeholder:text-zinc-500'
+                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
                                     id='team' name='team'>
                                     <option disabled selected value=''>
                                         Selecione sua equipe
@@ -200,10 +200,10 @@ export default function CreateEggModal(props: modalProps) {
 
                     </div>
 
-                    <div className='flex w-full justify-between'>
+                    <div className='flex w-full justify-between md:text-xs text-2xl'>
                         <div className='flex flex-col'>
                             <span className='text-white block'>Abre:</span>
-                            <strong className=' block text-blue-500'>{props.min}</strong>
+                            <strong className=' block text-blue-500 md:text-lg text-5xl'>{props.min}</strong>
 
                         </div>
                         <div className='flex flex-col gap-2 items-center justify-center'>
@@ -218,11 +218,11 @@ export default function CreateEggModal(props: modalProps) {
 
                     <footer className='mt-4 flex justify-end gap-4'>
                         <Dialog.Close
-                            className='bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600'>
+                            className='bg-zinc-500 md:px-5 px-10 md:h-12 h-20 rounded-md font-semibold hover:bg-zinc-600 md:text-sm text-3xl'>
                             Cancelar
                         </Dialog.Close>
                         <button
-                            className='bg-violet-500 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600'
+                            className='bg-violet-500 md:px-5 px-4 md:h-12 h-20 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600 md:text-sm text-3xl'
                             type='submit'>
                             <GameController size={24} />
                             Marcar Raid

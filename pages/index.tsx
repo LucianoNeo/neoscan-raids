@@ -249,8 +249,8 @@ export default function App({ eggsSSR, raidsSSR }) {
       <img src='/assets/img/logo.png' alt="" width={300} />
 
       <div className='flex flex-col gap-6 items-center justify-center w-full'>
-        <div className='flex bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
-          <h1 className='text-white font-bold'>PARTIDAS AGENDADAS:</h1>
+        <div className='flex bg-slate-800 items-center gap-4 p-4 justify-center w-full'>
+          <h1 className='text-white font-bold text-3xl md:text-lg'>PARTIDAS AGENDADAS:</h1>
 
         </div>
         {matches ?
@@ -310,35 +310,35 @@ export default function App({ eggsSSR, raidsSSR }) {
       </div>
 
       <div className='flex flex-col gap-6 items-center justify-center w-full mt-6'>
-        <div className='flex bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
-          <h1 className='text-white font-bold'>OVOS A ECLODIR:</h1>
+        <div className='flex md:flex-row flex-col bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
+          <h1 className='text-white font-bold text-3xl md:text-lg'>OVOS A ECLODIR:</h1>
           <div className='flex'>
             <input type="text" placeholder='Digite o nome do ginásio para pesquisar'
               value={eggSearch} onChange={e => setEggSearch(e.target.value.toLowerCase())}
-              className='bg-slate-900 p-2 rounded text-white md:w-80' />
+              className='bg-slate-900 p-2 rounded text-white md:w-80 w-[600px] text-3xl md:text-base' />
           </div>
-          <div className='flex gap-3 items-center'>
+          <div className='flex gap-3 items-center text-3xl md:text-lg'>
 
             <h1 className='text-white'>FILTROS:</h1>
-            <div className='text-white text-xs grid  grid-cols-2 gap-1 flex-wrap'>
+            <div className='text-white text-3xl md:text-xs grid  grid-cols-2 gap-1 flex-wrap'>
               <div className='gap-2 flex'>
                 <label htmlFor="level1">Level 1</label>
-                <input type="checkbox" name="level1" id="1" checked={eggsLevel.has(1)}
+                <input className='md:w-4 w-10' type="checkbox" name="level1" id="1" checked={eggsLevel.has(1)}
                   onChange={() => handleEggLevel(1)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level3">Level 3</label>
-                <input type="checkbox" name="level3" id="3" checked={eggsLevel.has(3)}
+                <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={eggsLevel.has(3)}
                   onChange={() => handleEggLevel(3)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level5">Level 5</label>
-                <input type="checkbox" name="level3" id="3" checked={eggsLevel.has(5)}
+                <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={eggsLevel.has(5)}
                   onChange={() => handleEggLevel(5)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level6">Mega Raids</label>
-                <input type="checkbox" name="level6" id="6" checked={eggsLevel.has(6)}
+                <input className='md:w-4 w-10' type="checkbox" name="level6" id="6" checked={eggsLevel.has(6)}
                   onChange={() => handleEggLevel(6)} />
               </div>
 
@@ -408,41 +408,41 @@ export default function App({ eggsSSR, raidsSSR }) {
 
 
       <div className='flex flex-col gap-6 place-items-start mt-10 w-full mb-20'>
-        <div className='flex bg-slate-800 w-full items-center gap-4 p-4 justify-between'>
-          <h1 className='text-white font-bold'>RAIDS EM ANDAMENTO</h1>
+        <div className='flex md:flex-row flex-col bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
+          <h1 className='text-white font-bold text-3xl md:text-lg'>RAIDS EM ANDAMENTO:</h1>
           <div className='flex flex-col md:flex-row gap-3'>
             <input type="text" placeholder='Digite para pesquisar'
               value={search} onChange={e => setSearch(e.target.value.toLowerCase())}
-              className='bg-slate-900 p-2 rounded text-white' />
+              className='bg-slate-900 p-2 rounded text-white md:w-80 w-[600px] text-3xl md:text-base' />
 
-            <select value={filter} onChange={(field) => setFilter(field.target.value)} name="search" id="search" className='bg-slate-900 p-2 rounded text-white'>
+            <select value={filter} onChange={(field) => setFilter(field.target.value)} name="search" id="search" className='bg-slate-900 p-2 rounded text-white md:w-80 w-[600px] text-3xl md:text-base'>
               <option value="pokemon">Pokémon</option>
               <option value="gym">Ginásio</option>
             </select>
             {/* <button className='py-3 px-4 bg-violet-500 text-white rounded hover:bg-violet-600 flex items-center gap-3' >BUSCAR</button> */}
           </div>
-          <div className='flex gap-3 items-center'>
+          <div className='flex gap-3 items-center text-3xl md:text-lg'>
 
             <h1 className='text-white'>FILTROS:</h1>
-            <div className='text-white text-xs grid  grid-cols-2 gap-1 flex-wrap'>
+            <div className='text-white text-3xl md:text-xs grid  grid-cols-2 gap-1 flex-wrap'>
               <div className='gap-2 flex'>
                 <label htmlFor="level1">Level 1</label>
-                <input type="checkbox" name="level1" id="1" checked={raidsLevel.has(1)}
+                <input className='md:w-4 w-10' type="checkbox" name="level1" id="1" checked={raidsLevel.has(1)}
                   onChange={() => handleRaidLevel(1)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level3">Level 3</label>
-                <input type="checkbox" name="level3" id="3" checked={raidsLevel.has(3)}
+                <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={raidsLevel.has(3)}
                   onChange={() => handleRaidLevel(3)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level5">Level 5</label>
-                <input type="checkbox" name="level3" id="3" checked={raidsLevel.has(5)}
+                <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={raidsLevel.has(5)}
                   onChange={() => handleRaidLevel(5)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level6">Mega Raids</label>
-                <input type="checkbox" name="level6" id="6" checked={raidsLevel.has(6)}
+                <input className='md:w-4 w-10' type="checkbox" name="level6" id="6" checked={raidsLevel.has(6)}
                   onChange={() => handleRaidLevel(6)} />
               </div>
 

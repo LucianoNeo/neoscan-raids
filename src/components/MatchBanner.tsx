@@ -39,12 +39,11 @@ export default function MatchBanner(props: MatchBannerProps) {
   }, [])
 
   return (
-    <div className='relative rounded-lg overflow-hidden w-64'>
+    <div className='relative rounded-lg overflow-hidden w-[500px] md:w-64'>
 
-      <img src={props.bannerUrl} className=' opacity-50' />
+      <img src={props.bannerUrl} className=' opacity-50 w-full' />
 
-
-      <div className='justify-between w-60 absolute z-10 text-white top-4 text-3xl font-extrabold left-4 '>
+      <div className='justify-between md:w-60 absolute z-10 text-white top-4 text-7xl md:text-3xl font-extrabold left-4 '>
         {props.raidLevel == 6 && <h1>MEGA</h1>}
         <h1 className='drop-shadow-lg truncate'>{props.name.toUpperCase()}</h1>
         <h1 className='flex items-center gap-2'>{props.raidLevel} <Star weight="fill" color='yellow' /></h1>
@@ -52,24 +51,23 @@ export default function MatchBanner(props: MatchBannerProps) {
 
       <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0 items-center justify-center' >
 
-        <span className='text-white block text-sm  z-10'>Ginásio:</span>
-        {/* <a className='flex gap-3 items-center' href={`https://www.google.com/maps/search/?api=1&query=${props.lat},${props.lon}`} target='_blank'>
-          <MapTrifold size={32} weight="bold" color='white' /> */}
-        <p className='text-white font-bold truncate ... z-auto'>{props.title}</p>
-        <img src={props.pokemonImg} alt="" className='w-52 left-8 bottom-36 absolute' />
+        <span className='text-white block text-4xl md:text-sm  z-10'>Ginásio:</span>
 
-        <span className='text-white block text-sm'>Marcada para:</span>
-        <strong className=' block text-sm text-blue-500'>{inicio}</strong>
-        <span className='text-white block text-sm '>{props.playersCount} Jogador (es):</span>
+        <p className='text-white font-bold truncate text-4xl md:text-sm'>{props.title}</p>
+        <img src={props.pokemonImg} alt="" className='w-[600px] md:w-36 absolute md:bottom-28 md:left-14 bottom-52 left-1' />
+
+        <span className='text-white block text-4xl md:text-sm'>Marcada para:</span>
+        <strong className=' block text-4xl md:text-sm text-blue-500'>{inicio}</strong>
+        <span className='text-white block text-4xl md:text-sm'>{props.playersCount} Jogador (es):</span>
         <div className='flex gap-2 mt-2 overflow-auto  pr-4'>
           {props.players.map((player, index) =>
           (
 
-            <div key={index} className='bg-slate-800 rounded py-1 px-2 h-8 min-w-fit flex items-center justify-center gap-2 mb-1'>
-              <img src={player.team == "valor" ? './assets/img/icon-valor.png' : player.team == "instinct" ? './assets/img/icon-instinct.png' : './assets/img/icon-mystic.png'} alt="" width={20} />
-              <span className='text-white font-bold'>{player.playType}</span>
-              <span className='text-white text-xs font-extrabold'>{player.username.toUpperCase()}</span>
-              <span className='text-xs font-bold text-white'>L{player.playerLevel}</span>
+            <div key={index} className='bg-slate-800 md:rounded rounded-2xl py-1 px-5 md:px-2 md:h-8 h-20 flex items-center justify-center gap-2 mb-1 min-w-fit'>
+              <img src={player.team == "valor" ? './assets/img/icon-valor.png' : player.team == "instinct" ? './assets/img/icon-instinct.png' : './assets/img/icon-mystic.png'} alt="" className='w-12 md:w-4' />
+              <span className='text-white font-bold text-4xl md:text-sm'>{player.playType}</span>
+              <span className='text-white text-4xl md:text-sm font-extrabold'>{player.username.toUpperCase()}</span>
+              <span className='text-4xl md:text-sm font-bold text-white'>L{player.playerLevel}</span>
             </div>
 
           )

@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Component {...pageProps} />
-      <ToastContainer toastStyle={{ backgroundColor: "#222", color: 'white' }} />
+      <ToastContainer toastStyle={{ backgroundColor: "#2A2634", color: 'white', fontSize: 28, textAlign: 'right', padding: 20 }} />
     </>
   )
 
