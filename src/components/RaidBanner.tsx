@@ -26,7 +26,7 @@ export default function RaidBanner(props: RaidBannerProps) {
   }, [])
 
   return (
-    <div className='relative rounded-lg overflow-hidden w-[500px] md:w-64'>
+    <div className='relative md:rounded-lg rounded-3xl overflow-hidden w-[120vw] md:w-64'>
 
       <img src={props.bannerUrl} className='opacity-50 w-full' />
 

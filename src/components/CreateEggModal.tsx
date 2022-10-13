@@ -113,13 +113,13 @@ export default function CreateEggModal(props: modalProps) {
                     <div className=' my-4 flex items-center justify-start gap-2'>
                         <img src={props.img} alt="" className='md:w-[150px]' />
                         <div className='p-2 w-[50%] md:text-xs text-3xl'>
-                            <h1 className='font-bold'>Ovo Level {props.level}</h1>
+                            <h1 className='font-bold'>Level {props.level}</h1>
                             <span>Ginásio: </span>
                             <h1 className='font-bold'>{props.gym}</h1>
                         </div>
                         <div className=''>
                             <select
-                                className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-52'
+                                className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-28 w-[44vw]'
                                 id='pokemon' name='pokemon'>
                                 <option disabled selected value=''>
                                     Pokémon?
@@ -136,7 +136,7 @@ export default function CreateEggModal(props: modalProps) {
 
 
 
-                    <div className='flex items-center w-full flex-col md:text-xs text-3xl'>
+                    <div className='flex items-center w-full flex-col md:text-xs text-2xl'>
 
                         <div className='w-full flex items-center justify-between'>
                             <div className='gap-2 flex flex-col'>
@@ -163,7 +163,7 @@ export default function CreateEggModal(props: modalProps) {
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='playType'>Como vai participar?</label>
                                 <select
-                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
+                                    className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-[65vw]'
                                     id='playType' name='playType'>
                                     <option disabled selected value=''>
                                         Seu estilo de jogo
@@ -177,7 +177,7 @@ export default function CreateEggModal(props: modalProps) {
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='team'>Qual a sua equipe?</label>
                                 <select
-                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
+                                    className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-[65vw]'
                                     id='team' name='team'>
                                     <option disabled selected value=''>
                                         Selecione sua equipe
@@ -204,14 +204,10 @@ export default function CreateEggModal(props: modalProps) {
                         <div className='flex flex-col'>
                             <span className='text-white block'>Abre:</span>
                             <strong className=' block text-blue-500 md:text-lg text-5xl'>{props.min}</strong>
-
                         </div>
-                        <div className='flex flex-col gap-2 items-center justify-center'>
+                        <div className='flex flex-col gap-2 items-end justify-between'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
-
-                            <Input type="time" name="hourStart" id="hourStart" min={props.min} />
-
-
+                            <input type="time" name="hourStart" id="hourStart" min={props.min} className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-20 w-40' />
                         </div>
 
                     </div>

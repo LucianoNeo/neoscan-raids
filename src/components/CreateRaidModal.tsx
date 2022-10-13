@@ -120,7 +120,7 @@ export default function CreateRaidModal(props: modalProps) {
 
 
 
-                    <div className='flex items-center w-full flex-col  md:text-lg text-3xl md:gap-0 gap-8'>
+                    <div className='flex items-center w-full flex-col  md:text-lg text-2xl md:gap-0 gap-8'>
 
                         <div className='w-full flex items-center justify-between '>
                             <div className=' flex flex-col md:gap-2 gap-6'>
@@ -147,7 +147,7 @@ export default function CreateRaidModal(props: modalProps) {
                             <div className=' flex flex-col md:gap-2 gap-6 mt-1'>
                                 <label htmlFor='playType'>Como vai participar?</label>
                                 <select
-                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
+                                    className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-[65vw]'
                                     id='playType' name='playType'>
                                     <option disabled selected value=''>
                                         Seu estilo de jogo
@@ -161,7 +161,7 @@ export default function CreateRaidModal(props: modalProps) {
                             <div className=' flex flex-col md:gap-2 gap-6 mt-1'>
                                 <label htmlFor='team'>Qual a sua equipe?</label>
                                 <select
-                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
+                                    className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-[65vw]'
                                     id='team' name='team'>
                                     <option disabled selected value=''>
                                         Selecione sua equipe
@@ -184,17 +184,17 @@ export default function CreateRaidModal(props: modalProps) {
 
                     </div>
 
-                    <div className='flex w-full justify-between md:text-lg text-3xl'>
+                    <div className='flex w-full justify-between md:text-lg text-2xl'>
                         <div className='flex flex-col md:gap-0 gap-4'>
                             <span className='text-white block'>Começou:</span>
                             <strong className=' block md:text-lg text-5xl text-blue-500'>{props.min}</strong>
                             <span className='text-white block'> Termina:</span>
                             <strong className='text-red-600 block md:text-lg text-5xl'>{props.max}</strong>
                         </div>
-                        <div className='flex flex-col gap-2 items-center '>
+                        <div className='flex flex-col gap-2 items-end '>
                             <label htmlFor="hourStart">Qual horário de início?</label>
 
-                            <Input type="time" name="hourStart" id="hourStart" min={props.min} max={props.max} />
+                            <input type="time" name="hourStart" id="hourStart" min={props.min} max={props.max} className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-20 w-40' />
 
 
                         </div>

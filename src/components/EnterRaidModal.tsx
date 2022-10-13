@@ -89,30 +89,30 @@ export default function EnterRaidModal(props: modalProps) {
                 <Dialog.Title className='md:text-3xl text-5xl font-black'>Participar desta Raid</Dialog.Title>
                 <form className='flex flex-col gap-4' onSubmit={handleCreateAd}>
 
-                    <div className=' my-4 flex items-center justify-start gap-2'>
-                        <div className='flex flex-col items-center text-center'>
-                            <h1 className='font-bold text-blue-500 md:text-md text-3xl' >{props.pokemonName.toUpperCase()}</h1>
+                    <div className=' my-4 flex  justify-between gap-2'>
+                        <div className='flex flex-col items-center text-center justify-around'>
+                            <h1 className='font-bold text-blue-500 md:text-3xl text-4xl' >{props.pokemonName.toUpperCase()}</h1>
                             <img src={props.img} alt="" className='md:w-[150px]' />
                             <span className='md:text-xs text-2xl'>Marcado para:</span>
                             <strong className='text-red-700 md:text-lg text-5xl'>{props.min}</strong>
                         </div>
-                        <div className='p-2 w-[50%] md:text-xs text-2xl'>
 
-                            <span>Ginásio: </span>
-                            <h1 className='font-bold'>{props.gym}</h1>
-                        </div>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col items-center'>
+                            <div className='flex md:flex-row flex-col gap-2 p-2 md:text-xs text-3xl'>
+                                <span>Ginásio: </span>
+                                <h1 className='font-bold'>{props.gym}</h1>
+                            </div>
                             <a href={`https://www.google.com/maps/search/?api=1&query=${props.lat},${props.lon}`} target='_blank' rel="noreferrer">
                                 <img src={map} alt="" className='rounded-lg md:w-[200px] w-[700px]' />
                             </a>
-                            <a href="#" className='flex items-center mt-4 hover:text-blue-500 justify-between px-1 md:px-0'
+                            <a href="#" className='flex items-center mt-4 hover:text-blue-500 justify-between px-1 md:px-0 gap-3'
                                 onClick={() => {
                                     navigator.clipboard.writeText(`${props.lat},${props.lon}`)
                                     toast.success('Coordenadas copiadas!')
                                 }}
                             >
-                                <span className='md:text-xs text-xl underline '>Copiar Coordenadas</span>
-                                <CopySimple size={22} color="white" weight="fill" />
+                                <span className='md:text-xs text-2xl underline'>Copiar Coordenadas</span>
+                                <CopySimple size={30} color="white" weight="fill" />
                             </a>
 
 
@@ -121,7 +121,7 @@ export default function EnterRaidModal(props: modalProps) {
 
 
 
-                    <div className='flex items-center w-full flex-col md:text-xs text-3xl'>
+                    <div className='flex items-center w-full flex-col md:text-xs text-2xl gap-5 md:gap-1'>
 
                         <div className='w-full flex items-center justify-between '>
                             <div className='gap-2 flex flex-col '>
@@ -148,7 +148,7 @@ export default function EnterRaidModal(props: modalProps) {
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='playType'>Como vai participar?</label>
                                 <select defaultValue='Seu estilo de jogo'
-                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
+                                    className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-[65vw]'
                                     id='playType' name='playType'>
                                     <option disabled >
                                         Seu estilo de jogo
@@ -162,7 +162,7 @@ export default function EnterRaidModal(props: modalProps) {
                             <div className=' flex flex-col gap-2 mt-1'>
                                 <label htmlFor='team'>Qual a sua equipe?</label>
                                 <select defaultValue='Selecione sua equipe'
-                                    className='bg-zinc-900 rounded py-2.5 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-64'
+                                    className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-48 w-[65vw]'
                                     id='team' name='team'>
                                     <option disabled >
                                         Selecione sua equipe

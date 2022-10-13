@@ -39,17 +39,17 @@ export default function MatchBanner(props: MatchBannerProps) {
   }, [])
 
   return (
-    <div className='relative rounded-lg overflow-hidden w-[500px] md:w-64'>
+    <div className='relative md:rounded-lg rounded-3xl overflow-hidden w-[120vw] md:w-64'>
 
       <img src={props.bannerUrl} className=' opacity-50 w-full' />
 
-      <div className='justify-between md:w-60 absolute z-10 text-white top-4 text-7xl md:text-3xl font-extrabold left-4 '>
+      <div className='justify-between md:w-60 absolute z-10 text-white top-4 text-7xl md:text-3xl font-extrabold left-4 px-5'>
         {props.raidLevel == 6 && <h1>MEGA</h1>}
         <h1 className='drop-shadow-lg truncate'>{props.name.toUpperCase()}</h1>
         <h1 className='flex items-center gap-2'>{props.raidLevel} <Star weight="fill" color='yellow' /></h1>
       </div>
 
-      <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0 items-center justify-center' >
+      <div className='w-full pt-16 pb-4 md:px-4 px-7 bg-game-gradient absolute bottom-0 left-0 right-0 items-center justify-center' >
 
         <span className='text-white block text-4xl md:text-sm  z-10'>Ginásio:</span>
 
@@ -66,8 +66,8 @@ export default function MatchBanner(props: MatchBannerProps) {
             <div key={index} className='bg-slate-800 md:rounded rounded-2xl py-1 px-5 md:px-2 md:h-8 h-20 flex items-center justify-center gap-2 mb-1 min-w-fit'>
               <img src={player.team == "valor" ? './assets/img/icon-valor.png' : player.team == "instinct" ? './assets/img/icon-instinct.png' : './assets/img/icon-mystic.png'} alt="" className='w-12 md:w-4' />
               <span className='text-white font-bold text-4xl md:text-sm'>{player.playType}</span>
-              <span className='text-white text-4xl md:text-sm font-extrabold'>{player.username.toUpperCase()}</span>
-              <span className='text-4xl md:text-sm font-bold text-white'>L{player.playerLevel}</span>
+              <span className='text-white text-2xl md:text-sm font-extrabold'>{player.username.toUpperCase()}</span>
+              <span className='text-2xl md:text-sm font-bold text-white'>L{player.playerLevel}</span>
             </div>
 
           )
