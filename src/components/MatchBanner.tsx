@@ -54,7 +54,7 @@ export default function MatchBanner(props: MatchBannerProps) {
         <span className='text-white block text-4xl md:text-sm  z-10'>Ginásio:</span>
 
         <p className='text-white font-bold truncate text-4xl md:text-sm'>{props.title}</p>
-        <img src={props.pokemonImg} alt="" className='w-[600px] md:w-36 absolute md:bottom-28 md:left-14 bottom-52 left-1' />
+        <img src={props.pokemonImg} alt="" className='w-[600px] md:w-36 absolute md:bottom-28 md:left-14 bottom-64 left-1' />
 
         <span className='text-white block text-4xl md:text-sm'>Marcada para:</span>
         <strong className=' block text-4xl md:text-sm text-blue-500'>{inicio}</strong>

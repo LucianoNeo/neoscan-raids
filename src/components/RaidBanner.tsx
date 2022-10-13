@@ -37,7 +37,7 @@ export default function RaidBanner(props: RaidBannerProps) {
       </div>
 
       <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0 items-center justify-center' >
-        <img src={props.pokemonImg} alt="" className='w-[600px] md:w-36 absolute md:bottom-28 md:left-14 bottom-52 left-1' />
+        <img src={props.pokemonImg} alt="" className='w-[600px] md:w-36 absolute md:bottom-28 md:left-14 bottom-64 left-1' />
         <div className='flex flex-col gap-2 md:gap-0'>
           <span className='text-white block text-4xl md:text-sm  z-10'>Ginásio:</span>
           <p className='text-white font-bold truncate text-4xl md:text-sm'>{props.title}</p>
