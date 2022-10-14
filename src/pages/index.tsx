@@ -254,7 +254,7 @@ export default function App({ eggsSSR, raidsSSR }) {
           <h1 className='text-white font-bold text-3xl md:text-lg'>PARTIDAS AGENDADAS:</h1>
 
         </div>
-        {matches.length == 0 &&
+        {matches && matches.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
             <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há partidas marcadas no momento...</h2>
@@ -354,7 +354,7 @@ export default function App({ eggsSSR, raidsSSR }) {
             </div>
           </div>
         </div>
-        {eggsFiltered.length == 0 &&
+        {eggsFiltered && eggsFiltered.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
             <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há ovos ativos no momento...</h2>
@@ -464,7 +464,7 @@ export default function App({ eggsSSR, raidsSSR }) {
             </div>
           </div>
         </div>
-        {filtered.length == 0 &&
+        {filtered && filtered.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
             <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há raids ativas no momento...</h2>
