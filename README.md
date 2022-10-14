@@ -23,6 +23,7 @@ O projeto em seu estado atual (beta) utiliza:
 - [x] Permitir ao usuário agendar uma partida através dos ovos a abrir
 - [x] Permitir ao usuário agendar uma partida através das raids ativas
 - [x] Permitir ao usuário participar de uma partida já agendada
+- [x] Responsividade  
 - [ ] Implantar sistema de web-push-notifications 
 - [ ] Permitir ao usuário ativar as notificações para partidas agendadas
 - [ ] Permitir ao usuário chamar ajuda enviando uma notificação aos usuários do site
