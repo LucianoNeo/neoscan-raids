@@ -136,7 +136,7 @@ export default function CreateEggModal(props: modalProps) {
 
 
 
-                    <div className='flex items-center w-full flex-col md:text-xs text-2xl'>
+                    <div className='flex items-center w-full flex-col md:text-base text-2xl'>
 
                         <div className='w-full flex items-center justify-between'>
                             <div className='gap-2 flex flex-col'>
@@ -207,7 +207,7 @@ export default function CreateEggModal(props: modalProps) {
                         </div>
                         <div className='flex flex-col gap-2 items-end justify-between'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
-                            <input type="time" name="hourStart" id="hourStart" min={props.min} className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-20 w-40' />
+                            <input type="time" name="hourStart" id="hourStart" min={props.min} className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-28 w-40' />
                         </div>
 
                     </div>
