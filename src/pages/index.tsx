@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { eggsSSR, raidsSSR },
-    revalidate: 60,
+    revalidate: 60
   }
 
 }
@@ -63,18 +63,18 @@ export default function App({ eggsSSR, raidsSSR }) {
 
 
 
-  const raidsData = useSWR(process.env.API_RAIDS, getRaids,
+  const raidsData = useSWR('api/raids', getRaids,
     {
-      refreshInterval: 180000,
+      refreshInterval: 60000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
       fallbackData: raidsSSR
     }
   ).data
 
-  const eggsData = useSWR(process.env.API_EGGS, getEggs,
+  const eggsData = useSWR('api/eggs', getEggs,
     {
-      refreshInterval: 180000,
+      refreshInterval: 60000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
       fallbackData: eggsSSR
@@ -83,7 +83,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const matchesData = useSWR('/api/matches', getMatches,
     {
-      refreshInterval: 30000,
+      refreshInterval: 60000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
     }
