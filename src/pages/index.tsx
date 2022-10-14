@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import RaidBanner from '../src/components/RaidBanner'
+import RaidBanner from '../components/RaidBanner'
 
 import Carousel from '@itseasy21/react-elastic-carousel'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -8,12 +8,13 @@ import axios from 'axios'
 import { format, toDate, utcToZonedTime } from 'date-fns-tz'
 import { GetStaticProps } from 'next'
 import useSWR from "swr"
-import CreateEggModal from '../src/components/CreateEggModal'
-import EggBanner from '../src/components/EggBanner'
-import Loader from '../src/components/Loader'
-import CreateRaidModal from '../src/components/CreateRaidModal'
-import MatchBanner from '../src/components/MatchBanner'
-import EnterRaidModal from '../src/components/EnterRaidModal'
+import CreateEggModal from '../components/CreateEggModal'
+import EggBanner from '../components/EggBanner'
+import Loader from '../components/Loader'
+import CreateRaidModal from '../components/CreateRaidModal'
+import MatchBanner from '../components/MatchBanner'
+import EnterRaidModal from '../components/EnterRaidModal'
+import Header from '../components/Header'
 
 
 
@@ -245,7 +246,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   return (
     <div className='w-[160vw] md:w-[98vw] mx-auto flex items-center flex-col'>
-
+      <Header />
       <img src='/assets/img/logo.png' alt="" width={300} />
 
       <div className='flex flex-col gap-6 items-center justify-center w-full'>
@@ -253,6 +254,12 @@ export default function App({ eggsSSR, raidsSSR }) {
           <h1 className='text-white font-bold text-3xl md:text-lg'>PARTIDAS AGENDADAS:</h1>
 
         </div>
+        {matches.length == 0 &&
+          <div className='flex items-center gap-3 py-4'>
+            <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
+            <h2 className='text-white font-bold text-2xl md:text-lg'>Não há partidas marcadas no momento...</h2>
+          </div>
+        }
         {matches ?
           <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
             {matches?.map(match => {
@@ -347,6 +354,12 @@ export default function App({ eggsSSR, raidsSSR }) {
             </div>
           </div>
         </div>
+        {eggsFiltered.length == 0 &&
+          <div className='flex items-center gap-3 py-4'>
+            <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
+            <h2 className='text-white font-bold text-2xl md:text-lg'>Não há ovos ativos no momento...</h2>
+          </div>
+        }
         {eggsFiltered ?
           <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
             {eggsFiltered?.map(egg => {
@@ -451,6 +464,12 @@ export default function App({ eggsSSR, raidsSSR }) {
             </div>
           </div>
         </div>
+        {filtered.length == 0 &&
+          <div className='flex items-center gap-3 py-4'>
+            <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
+            <h2 className='text-white font-bold text-2xl md:text-lg'>Não há raids ativas no momento...</h2>
+          </div>
+        }
         {filtered ?
 
           <Carousel

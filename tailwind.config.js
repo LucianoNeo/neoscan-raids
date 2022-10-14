@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['Inter', 'sans-serif']
+      sans: ['Inter']
     },
     extend: {
       backgroundImage: {
@@ -18,6 +18,21 @@ module.exports = {
       colors: {
 
       },
+    },
+    keyframes: {
+      bannerWebAnimation: {
+        '0%': { right: '-900px' },
+        '100%': { right: '1200px' },
+      },
+      bannerMobileAnimation: {
+        '0%': { right: '-1700px' },
+        '100%': { right: '1200px' },
+      }
+
+    },
+    animation: {
+      'bannerWeb': 'bannerWebAnimation 30s infinite linear',
+      'bannerMobile': 'bannerMobileAnimation 30s infinite linear',
     },
   },
   plugins: [],
