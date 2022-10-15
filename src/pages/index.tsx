@@ -174,6 +174,7 @@ export default function App({ eggsSSR, raidsSSR }) {
   let eggsFiltered
   let level1Names = []
   let level3Names = []
+  let level4Names = []
   let level5Names = []
   let level6Names = []
   let level9Names = []
@@ -234,6 +235,7 @@ export default function App({ eggsSSR, raidsSSR }) {
     filtered = raids.filter((e) => raidsLevel.has(e.level))
     level1Names = raids.filter(raid => raid.level == 1)
     level3Names = raids.filter(raid => raid.level == 3)
+    level4Names = raids.filter(raid => raid.level == 4)
     level5Names = raids.filter(raid => raid.level == 5)
     level6Names = raids.filter(raid => raid.level == 6)
     level9Names = raids.filter(raid => raid.level == 9)
@@ -337,9 +339,14 @@ export default function App({ eggsSSR, raidsSSR }) {
                   onChange={() => handleEggLevel(1)} />
               </div>
               <div className='gap-2 flex'>
-                <label htmlFor="level3">Level 3</label>
+                <label htmlFor="level4">Level 3</label>
                 <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={eggsLevel.has(3)}
                   onChange={() => handleEggLevel(3)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level4">Level 4</label>
+                <input className='md:w-4 w-10' type="checkbox" name="level4" id="4" checked={eggsLevel.has(4)}
+                  onChange={() => handleEggLevel(4)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level5">Level 5</label>
@@ -454,6 +461,11 @@ export default function App({ eggsSSR, raidsSSR }) {
                 <label htmlFor="level3">Level 3</label>
                 <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={raidsLevel.has(3)}
                   onChange={() => handleRaidLevel(3)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level4">Level 4</label>
+                <input className='md:w-4 w-10' type="checkbox" name="level4" id="4" checked={raidsLevel.has(4)}
+                  onChange={() => handleRaidLevel(4)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level5">Level 5</label>
