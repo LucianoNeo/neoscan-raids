@@ -166,8 +166,8 @@ export default function App({ eggsSSR, raidsSSR }) {
   const [search, setSearch] = useState('')
   const [eggSearch, setEggSearch] = useState('')
   const [filter, setFilter] = useState('pokemon')
-  const [raidsLevel, setRaidsLevel] = useState(new Set([1, 3, 5, 6]))
-  const [eggsLevel, setEggsLevel] = useState(new Set([1, 3, 5, 6]))
+  const [raidsLevel, setRaidsLevel] = useState(new Set([1, 3, 5, 6, 7, 8, 9]))
+  const [eggsLevel, setEggsLevel] = useState(new Set([1, 3, 5, 6, 7, 8, 9]))
 
   let filtered
   let eggsFiltered
@@ -175,6 +175,7 @@ export default function App({ eggsSSR, raidsSSR }) {
   let level3Names = []
   let level5Names = []
   let level6Names = []
+  let level9Names = []
 
 
 
@@ -234,6 +235,7 @@ export default function App({ eggsSSR, raidsSSR }) {
     level3Names = raids.filter(raid => raid.level == 3)
     level5Names = raids.filter(raid => raid.level == 5)
     level6Names = raids.filter(raid => raid.level == 6)
+    level9Names = raids.filter(raid => raid.level == 9)
 
 
   }
@@ -327,7 +329,7 @@ export default function App({ eggsSSR, raidsSSR }) {
           <div className='flex gap-3 items-center text-3xl md:text-lg'>
 
             <h1 className='text-white'>FILTROS:</h1>
-            <div className='text-white text-3xl md:text-xs grid  grid-cols-2 gap-1 flex-wrap'>
+            <div className='text-white text-3xl md:text-xs grid  grid-cols-2 gap-2'>
               <div className='gap-2 flex'>
                 <label htmlFor="level1">Level 1</label>
                 <input className='md:w-4 w-10' type="checkbox" name="level1" id="1" checked={eggsLevel.has(1)}
@@ -347,6 +349,11 @@ export default function App({ eggsSSR, raidsSSR }) {
                 <label htmlFor="level6">Mega Raids</label>
                 <input className='md:w-4 w-10' type="checkbox" name="level6" id="6" checked={eggsLevel.has(6)}
                   onChange={() => handleEggLevel(6)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level6">Elite Raids</label>
+                <input className='md:w-4 w-10' type="checkbox" name="level9" id="9" checked={eggsLevel.has(9)}
+                  onChange={() => handleEggLevel(9)} />
               </div>
 
 
@@ -405,7 +412,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                       egg.level == 1 ? level1Names :
                         egg.level == 3 ? level3Names :
                           egg.level == 5 ? level5Names :
-                            level6Names}
+                            egg.level == 6 ? level6Names : level9Names}
                   />
                 </Dialog.Root>
 
@@ -432,7 +439,6 @@ export default function App({ eggsSSR, raidsSSR }) {
               <option value="pokemon">Pokémon</option>
               <option value="gym">Ginásio</option>
             </select>
-            {/* <button className='py-3 px-4 bg-violet-500 text-white rounded hover:bg-violet-600 flex items-center gap-3' >BUSCAR</button> */}
           </div>
           <div className='flex gap-3 items-center text-3xl md:text-lg'>
 
@@ -457,6 +463,11 @@ export default function App({ eggsSSR, raidsSSR }) {
                 <label htmlFor="level6">Mega Raids</label>
                 <input className='md:w-4 w-10' type="checkbox" name="level6" id="6" checked={raidsLevel.has(6)}
                   onChange={() => handleRaidLevel(6)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level6">Elite Raids</label>
+                <input className='md:w-4 w-10' type="checkbox" name="level9" id="9" checked={raidsLevel.has(9)}
+                  onChange={() => handleRaidLevel(9)} />
               </div>
 
 
