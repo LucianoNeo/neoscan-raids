@@ -66,7 +66,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const raidsData = useSWR('api/raids', getRaids,
     {
-      refreshInterval: 60000,
+      refreshInterval: 180000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
       fallbackData: raidsSSR
@@ -75,7 +75,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const eggsData = useSWR('api/eggs', getEggs,
     {
-      refreshInterval: 60000,
+      refreshInterval: 180000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
       fallbackData: eggsSSR
@@ -84,7 +84,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const matchesData = useSWR('/api/matches', getMatches,
     {
-      refreshInterval: 60000,
+      refreshInterval: 12000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
     }
