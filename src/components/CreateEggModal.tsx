@@ -124,7 +124,9 @@ export default function CreateEggModal(props: modalProps) {
                                 <option disabled selected value=''>
                                     Pokémon?
                                 </option>
+                                {props.level == 9 && <option>HOOPA</option>}
                                 <option>Desconhecido</option>
+
                                 {pokemonNames.map(pokemon => (
                                     <option key={pokemon}>{pokemon.toUpperCase()}</option>
                                 ))}
