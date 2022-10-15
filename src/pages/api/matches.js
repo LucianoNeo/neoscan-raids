@@ -20,6 +20,7 @@ export default async function handler(req, res) {
                 hourStart: 'asc'
             }
         })
+        prisma.$disconnect
         return res.status(200).send(res.json(matches))
 
     } else {
@@ -56,6 +57,7 @@ export default async function handler(req, res) {
                     playType: body.playType,
                 }
             })
+            prisma.$disconnect
             return res.status(201).json(match)// Handle any other HTTP method
         } else {
             const player = await prisma.players.create({
@@ -67,6 +69,7 @@ export default async function handler(req, res) {
                     playType: body.playType,
                 }
             })
+            prisma.$disconnect
             return res.status(201).json(player)// Handle any other HTTP method
         }
 
