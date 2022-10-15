@@ -77,7 +77,7 @@ export default function CreateRaidModal(props: modalProps) {
                 lon: `${props.lon}`,
                 team: data.team
             }
-            console.log(dataFull)
+
             await axios.post('/api/matches', dataFull)
             window.scrollTo({ top: 0, behavior: 'smooth' });
             location.reload()
