@@ -15,6 +15,7 @@ import CreateRaidModal from '../components/CreateRaidModal'
 import MatchBanner from '../components/MatchBanner'
 import EnterRaidModal from '../components/EnterRaidModal'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 
 
@@ -539,7 +540,7 @@ export default function App({ eggsSSR, raidsSSR }) {
           : <Loader />
         }
       </div>
-
+      <Footer />
     </div>
   )
 }
