@@ -173,10 +173,13 @@ export default function App({ eggsSSR, raidsSSR }) {
   let filtered
   let eggsFiltered
   let level1Names = []
+  let level2Names = []
   let level3Names = []
   let level4Names = []
   let level5Names = []
   let level6Names = []
+  let level7Names = []
+  let level8Names = []
   let level9Names = []
 
 
@@ -238,6 +241,8 @@ export default function App({ eggsSSR, raidsSSR }) {
     level4Names = raids.filter(raid => raid.level == 4)
     level5Names = raids.filter(raid => raid.level == 5)
     level6Names = raids.filter(raid => raid.level == 6)
+    level7Names = raids.filter(raid => raid.level == 7)
+    level8Names = raids.filter(raid => raid.level == 8)
     level9Names = raids.filter(raid => raid.level == 9)
 
 
@@ -339,7 +344,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                   onChange={() => handleEggLevel(1)} />
               </div>
               <div className='gap-2 flex'>
-                <label htmlFor="level4">Level 3</label>
+                <label htmlFor="level3">Level 3</label>
                 <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={eggsLevel.has(3)}
                   onChange={() => handleEggLevel(3)} />
               </div>
@@ -350,7 +355,7 @@ export default function App({ eggsSSR, raidsSSR }) {
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level5">Level 5</label>
-                <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={eggsLevel.has(5)}
+                <input className='md:w-4 w-10' type="checkbox" name="level3" id="5" checked={eggsLevel.has(5)}
                   onChange={() => handleEggLevel(5)} />
               </div>
               <div className='gap-2 flex'>
@@ -419,8 +424,9 @@ export default function App({ eggsSSR, raidsSSR }) {
                     pokemonNames={
                       egg.level == 1 ? level1Names :
                         egg.level == 3 ? level3Names :
-                          egg.level == 5 ? level5Names :
-                            egg.level == 6 ? level6Names : level9Names}
+                          egg.level == 4 ? level4Names :
+                            egg.level == 5 ? level5Names :
+                              egg.level == 6 ? level6Names : level9Names}
                   />
                 </Dialog.Root>
 
