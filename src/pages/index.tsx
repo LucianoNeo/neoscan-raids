@@ -167,8 +167,8 @@ export default function App({ eggsSSR, raidsSSR }) {
   const [search, setSearch] = useState('')
   const [eggSearch, setEggSearch] = useState('')
   const [filter, setFilter] = useState('pokemon')
-  const [raidsLevel, setRaidsLevel] = useState(new Set([1, 3, 5, 6, 7, 8, 9]))
-  const [eggsLevel, setEggsLevel] = useState(new Set([1, 3, 5, 6, 7, 8, 9]))
+  const [raidsLevel, setRaidsLevel] = useState(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+  const [eggsLevel, setEggsLevel] = useState(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
   let filtered
   let eggsFiltered
