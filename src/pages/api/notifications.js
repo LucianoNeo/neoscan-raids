@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             })
             .catch(function (error) {
                 console.error(error);
-                return res.status(401).send({ "message": "Error on request" })
+                return res.status(401).send(error)
             });
 
 
