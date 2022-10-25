@@ -66,7 +66,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const raidsData = useSWR('api/raids', getRaids,
     {
-      refreshInterval: 60000,
+      refreshInterval: 180000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
       fallbackData: raidsSSR
@@ -75,7 +75,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const eggsData = useSWR('api/eggs', getEggs,
     {
-      refreshInterval: 60000,
+      refreshInterval: 180000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
       fallbackData: eggsSSR
@@ -84,7 +84,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
   const matchesData = useSWR('/api/matches', getMatches,
     {
-      refreshInterval: 60000,
+      refreshInterval: 12000,
       revalidateIfStale: true,
       refreshWhenOffline: true,
     }
@@ -167,15 +167,19 @@ export default function App({ eggsSSR, raidsSSR }) {
   const [search, setSearch] = useState('')
   const [eggSearch, setEggSearch] = useState('')
   const [filter, setFilter] = useState('pokemon')
-  const [raidsLevel, setRaidsLevel] = useState(new Set([1, 3, 5, 6, 7, 8, 9]))
-  const [eggsLevel, setEggsLevel] = useState(new Set([1, 3, 5, 6, 7, 8, 9]))
+  const [raidsLevel, setRaidsLevel] = useState(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+  const [eggsLevel, setEggsLevel] = useState(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
   let filtered
   let eggsFiltered
   let level1Names = []
+  let level2Names = []
   let level3Names = []
+  let level4Names = []
   let level5Names = []
   let level6Names = []
+  let level7Names = []
+  let level8Names = []
   let level9Names = []
 
 
@@ -234,8 +238,11 @@ export default function App({ eggsSSR, raidsSSR }) {
     filtered = raids.filter((e) => raidsLevel.has(e.level))
     level1Names = raids.filter(raid => raid.level == 1)
     level3Names = raids.filter(raid => raid.level == 3)
+    level4Names = raids.filter(raid => raid.level == 4)
     level5Names = raids.filter(raid => raid.level == 5)
     level6Names = raids.filter(raid => raid.level == 6)
+    level7Names = raids.filter(raid => raid.level == 7)
+    level8Names = raids.filter(raid => raid.level == 8)
     level9Names = raids.filter(raid => raid.level == 9)
 
 
@@ -342,8 +349,13 @@ export default function App({ eggsSSR, raidsSSR }) {
                   onChange={() => handleEggLevel(3)} />
               </div>
               <div className='gap-2 flex'>
+                <label htmlFor="level4">Level 4</label>
+                <input className='md:w-4 w-10' type="checkbox" name="level4" id="4" checked={eggsLevel.has(4)}
+                  onChange={() => handleEggLevel(4)} />
+              </div>
+              <div className='gap-2 flex'>
                 <label htmlFor="level5">Level 5</label>
-                <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={eggsLevel.has(5)}
+                <input className='md:w-4 w-10' type="checkbox" name="level3" id="5" checked={eggsLevel.has(5)}
                   onChange={() => handleEggLevel(5)} />
               </div>
               <div className='gap-2 flex'>
@@ -412,8 +424,9 @@ export default function App({ eggsSSR, raidsSSR }) {
                     pokemonNames={
                       egg.level == 1 ? level1Names :
                         egg.level == 3 ? level3Names :
-                          egg.level == 5 ? level5Names :
-                            egg.level == 6 ? level6Names : level9Names}
+                          egg.level == 4 ? level4Names :
+                            egg.level == 5 ? level5Names :
+                              egg.level == 6 ? level6Names : level9Names}
                   />
                 </Dialog.Root>
 
@@ -454,6 +467,11 @@ export default function App({ eggsSSR, raidsSSR }) {
                 <label htmlFor="level3">Level 3</label>
                 <input className='md:w-4 w-10' type="checkbox" name="level3" id="3" checked={raidsLevel.has(3)}
                   onChange={() => handleRaidLevel(3)} />
+              </div>
+              <div className='gap-2 flex'>
+                <label htmlFor="level4">Level 4</label>
+                <input className='md:w-4 w-10' type="checkbox" name="level4" id="4" checked={raidsLevel.has(4)}
+                  onChange={() => handleRaidLevel(4)} />
               </div>
               <div className='gap-2 flex'>
                 <label htmlFor="level5">Level 5</label>

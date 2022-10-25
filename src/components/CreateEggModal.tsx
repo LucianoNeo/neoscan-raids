@@ -55,7 +55,8 @@ export default function CreateEggModal(props: modalProps) {
             const dataFull = {
                 username: data.username,
                 playType: data.playType,
-                hourStart: new Date(Date.prototype.setHours.apply(new Date(), data.hourStart.toString().split(':'))),
+                hourStart: new Date(data.hourStart.toString()),
+                //new Date(Date.prototype.setHours.apply(new Date(), data.hourStart.toString().split(':'))),
                 hourEnd: new Date(2022, 11, 10),
                 raidLevel: props.level,
                 pokemonImg: props.img,
@@ -70,7 +71,7 @@ export default function CreateEggModal(props: modalProps) {
                 lon: `${props.lon}`,
                 team: data.team
             }
-            console.log(dataFull)
+
             await axios.post('/api/matches', dataFull)
 
             toast.success('Raid agendada com sucesso!')
@@ -125,9 +126,17 @@ export default function CreateEggModal(props: modalProps) {
                                     Pokémon?
                                 </option>
                                 <option>Desconhecido</option>
-                                {pokemonNames.map(pokemon => (
-                                    <option key={pokemon}>{pokemon.toUpperCase()}</option>
-                                ))}
+                                {props.level == 9 ?
+                                    <>
+                                        <option>HOOPA</option>
+
+                                    </> :
+                                    pokemonNames.map(pokemon => (
+                                        <option key={pokemon}>{pokemon.toUpperCase()}</option>
+                                    ))
+
+                                }
+
 
                             </select>
 
@@ -207,7 +216,7 @@ export default function CreateEggModal(props: modalProps) {
                         </div>
                         <div className='flex flex-col gap-2 items-end justify-between'>
                             <label htmlFor="hourStart">Qual horário de início?</label>
-                            <input type="time" name="hourStart" id="hourStart" min={props.min} className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 md:w-28 w-40' />
+                            <input type='datetime-local' name="hourStart" id="hourStart" min={props.min} className='bg-zinc-900 rounded md:py-2.5 py-4 px-4 md:text-sm text-2xl placeholder:text-zinc-500 ' />
                         </div>
 
                     </div>
