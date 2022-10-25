@@ -16,7 +16,12 @@ import MatchBanner from '../components/MatchBanner'
 import EnterRaidModal from '../components/EnterRaidModal'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import OneSignal from 'react-onesignal';
 
+async function runOneSignal() {
+  await OneSignal.init({ appId: 'ad8a541e-1bda-4d6d-a74e-587711f18a54', allowLocalhostAsSecureOrigin: true });
+  OneSignal.showSlidedownPrompt();
+}
 
 
 
@@ -216,14 +221,11 @@ export default function App({ eggsSSR, raidsSSR }) {
     setEggs(eggsData)
     setRaids(raidsData)
     setMatches(matchesData)
-    // axios('/api/matches')
-    //   .then(response => {
-
-    //   })
-
-    console.log(matchesData)
   }, [raidsData, eggsData, matchesData])
 
+  useEffect(() => {
+    runOneSignal()
+  }, [])
 
 
   if (eggs) {
