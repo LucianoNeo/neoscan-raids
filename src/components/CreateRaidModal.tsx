@@ -77,8 +77,14 @@ export default function CreateRaidModal(props: modalProps) {
                 lon: `${props.lon}`,
                 team: data.team
             }
+            const notification = {
+                level: props.level,
+                gym: props.gym,
+                start: data.hourStart
+            }
 
             await axios.post('/api/matches', dataFull)
+            await axios.post('/api/notifications', notification)
             window.scrollTo({ top: 0, behavior: 'smooth' });
             location.reload()
             toast.success('Raids agendada com sucesso!')
