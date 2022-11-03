@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
-
+import Bulba from '../../public/assets/img/bulbaSad.png'
 import RaidBanner from '../components/RaidBanner'
-
+import Rotom from '../../public/assets/img/rotom.gif'
+import Logo from '../../public/assets/img/logo.png'
 import Carousel from '@itseasy21/react-elastic-carousel'
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
 import { format, toDate, utcToZonedTime } from 'date-fns-tz'
-import { GetStaticProps } from 'next'
+import { GetStaticProps, } from 'next'
 import useSWR from "swr"
 import CreateEggModal from '../components/CreateEggModal'
 import EggBanner from '../components/EggBanner'
@@ -17,6 +18,7 @@ import EnterRaidModal from '../components/EnterRaidModal'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import OneSignal from 'react-onesignal';
+import Image from 'next/image'
 
 async function runOneSignal() {
   await OneSignal.init({ appId: 'ad8a541e-1bda-4d6d-a74e-587711f18a54', allowLocalhostAsSecureOrigin: true });
@@ -259,7 +261,7 @@ export default function App({ eggsSSR, raidsSSR }) {
   return (
     <div className='w-[160vw] md:w-[98vw] mx-auto flex items-center flex-col'>
       <Header />
-      <img src='/assets/img/logo.png' alt="" width={300} />
+      <Image src={Logo} />
 
       <div className='flex flex-col gap-6 items-center justify-center w-full'>
         <div className='flex bg-slate-800 items-center gap-4 p-4 justify-center w-full'>
@@ -268,7 +270,7 @@ export default function App({ eggsSSR, raidsSSR }) {
         </div>
         {matches && matches.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
-            <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
+            <Image src={Bulba} alt="" className='lg:w-16 w-28' />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há partidas marcadas no momento...</h2>
           </div>
         }
@@ -284,7 +286,9 @@ export default function App({ eggsSSR, raidsSSR }) {
               return (
 
 
-                <Dialog.Root key={match.id}>
+                <Dialog.Root key={match.id}
+                  open={false}
+                >
                   <Dialog.Trigger
                     className='items-start justify-start text-left'
                   >
@@ -293,7 +297,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                       pokemonId={match.pokemonId}
                       name={match.pokemonName}
                       raidLevel={match.raidLevel}
-                      bannerUrl={match.gymTeam == 1 ? './assets/img/mystic.png' : match.gymTeam == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
+                      bannerUrl={match.gymTeam == 1 ? '/assets/img/mystic.png' : match.gymTeam == 2 ? '/assets/img/valor.png' : '/assets/img/instinct.png'}
                       title={match.gym}
                       playersCount={match.players.length}
                       start={match.hourStart}
@@ -378,7 +382,7 @@ export default function App({ eggsSSR, raidsSSR }) {
         </div>
         {eggsFiltered && eggsFiltered.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
-            <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
+            <Image src={Bulba} alt="" className='lg:w-16 w-28' />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há ovos ativos no momento...</h2>
           </div>
         }
@@ -401,7 +405,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                     <EggBanner
                       pokemonId={egg.pokemonId}
                       level={egg.level}
-                      bannerUrl={egg.equipe == 1 ? './assets/img/mystic.png' : egg.equipe == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
+                      bannerUrl={egg.equipe == 1 ? '/assets/img/mystic.png' : egg.equipe == 2 ? '/assets/img/valor.png' : '/assets/img/instinct.png'}
                       title={egg.ginásio}
                       adsCount={0}
                       start={inicio}
@@ -498,7 +502,7 @@ export default function App({ eggsSSR, raidsSSR }) {
         </div>
         {filtered && filtered.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
-            <img src="./assets/img/bulbaSad.png" alt="" className='lg:w-16 w-28' />
+            <Image src={Bulba} alt="" className='lg:w-16 w-28' />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há raids ativas no momento...</h2>
           </div>
         }
@@ -526,7 +530,7 @@ export default function App({ eggsSSR, raidsSSR }) {
                       name={raid.pokemonName}
                       pokemonId={raid.pokemonId}
                       level={raid.level}
-                      bannerUrl={raid.equipe == 1 ? './assets/img/mystic.png' : raid.equipe == 2 ? './assets/img/valor.png' : './assets/img/instinct.png'}
+                      bannerUrl={raid.equipe == 1 ? '/assets/img/mystic.png' : raid.equipe == 2 ? '/assets/img/valor.png' : './assets/img/instinct.png'}
                       title={raid.ginásio}
                       adsCount={0}
                       start={inicio}
