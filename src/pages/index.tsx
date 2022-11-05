@@ -261,7 +261,7 @@ export default function App({ eggsSSR, raidsSSR }) {
   return (
     <div className='w-[160vw] md:w-[98vw] mx-auto flex items-center flex-col'>
       <Header />
-      <Image src={Logo} />
+      <Image src={Logo} width={250} height={100} />
 
       <div className='flex flex-col gap-6 items-center justify-center w-full'>
         <div className='flex bg-slate-800 items-center gap-4 p-4 justify-center w-full'>
@@ -270,7 +270,7 @@ export default function App({ eggsSSR, raidsSSR }) {
         </div>
         {matches && matches.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
-            <Image src={Bulba} alt="" className='lg:w-16 w-28' />
+            <Image src={Bulba} alt="" className='lg:w-16 w-28' width={80} height={80} />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há partidas marcadas no momento...</h2>
           </div>
         }
@@ -382,12 +382,12 @@ export default function App({ eggsSSR, raidsSSR }) {
         </div>
         {eggsFiltered && eggsFiltered.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
-            <Image src={Bulba} alt="" className='lg:w-16 w-28' />
+            <Image src={Bulba} alt="" className='lg:w-16 w-28' width={80} height={80} />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há ovos ativos no momento...</h2>
           </div>
         }
         {eggsFiltered ?
-          <Carousel breakPoints={breakpoints} isRTL={false} className='px-5'>
+          <Carousel breakPoints={breakpoints} isRTL={false} className='px-5' pagination>
             {eggsFiltered?.map(egg => {
               const dateInicio = toDate(egg.inicio)
               const brasilDateInicio = utcToZonedTime(dateInicio, 'America/Sao_Paulo')
@@ -502,7 +502,7 @@ export default function App({ eggsSSR, raidsSSR }) {
         </div>
         {filtered && filtered.length == 0 &&
           <div className='flex items-center gap-3 py-4'>
-            <Image src={Bulba} alt="" className='lg:w-16 w-28' />
+            <Image src={Bulba} alt="" className='lg:w-16 w-28' width={80} height={80} />
             <h2 className='text-white font-bold text-2xl md:text-lg'>Não há raids ativas no momento...</h2>
           </div>
         }

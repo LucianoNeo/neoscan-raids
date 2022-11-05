@@ -32,7 +32,7 @@ body {
 }
 
 button.rec-dot {
-
+  border-radius: 30%;
   box-shadow: 0 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
