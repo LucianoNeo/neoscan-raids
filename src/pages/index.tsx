@@ -19,6 +19,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import OneSignal from 'react-onesignal';
 import Image from 'next/image'
+import PaginatedItems from '../components/PaginatedItems'
 
 async function runOneSignal() {
   await OneSignal.init({ appId: 'ad8a541e-1bda-4d6d-a74e-587711f18a54', allowLocalhostAsSecureOrigin: true });
@@ -35,6 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const raidsData = await axios(process.env.API_RAIDS)
   const raidsResponse = await raidsData.data
   const raidsSSR = raidsResponse.response.raids
+
 
   return {
     props: { eggsSSR, raidsSSR },
@@ -176,6 +178,8 @@ export default function App({ eggsSSR, raidsSSR }) {
   const [filter, setFilter] = useState('pokemon')
   const [raidsLevel, setRaidsLevel] = useState(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]))
   const [eggsLevel, setEggsLevel] = useState(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+  const [raidList, setRaidList] = useState(false)
+
 
   let filtered
   let eggsFiltered
@@ -449,7 +453,12 @@ export default function App({ eggsSSR, raidsSSR }) {
 
       <div className='flex flex-col gap-6 place-items-start mt-10 w-full mb-20'>
         <div className='flex md:flex-row flex-col bg-slate-800 items-center gap-4 p-4 justify-between w-full'>
-          <h1 className='text-white font-bold text-3xl md:text-lg'>RAIDS EM ANDAMENTO:</h1>
+          <div className='flex flex-col'>
+            <h1 className='text-white font-bold text-3xl md:text-lg'>RAIDS EM ANDAMENTO:</h1>
+            <span className='text-white text-xl md:text-xs underline cursor-pointer'
+              onClick={() => setRaidList(!raidList)}>{!raidList ? 'Mostrar lista' : 'Esconder lista'}</span>
+
+          </div>
           <div className='flex flex-col md:flex-row gap-3'>
             <input type="text" placeholder='Digite para pesquisar'
               value={search} onChange={e => setSearch(e.target.value.toLowerCase())}
@@ -564,6 +573,8 @@ export default function App({ eggsSSR, raidsSSR }) {
           : <Loader />
         }
       </div>
+      {raidList ? <PaginatedItems itemsPerPage={10} items={filtered} /> : ''}
+
       <Footer />
     </div>
   )
