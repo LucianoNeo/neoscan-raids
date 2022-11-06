@@ -41,6 +41,10 @@ button.rec-dot {
   display: flex;
   gap: 10px;
   font-size: 14px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .active {
@@ -48,9 +52,10 @@ button.rec-dot {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  width: 20px;
-  height: 20px;
-  background-color: #1E293B
+  padding: 1px 10px 1px 10px;
+  background-color: #1E293B;
+  font-size: 20px;
+
 }
 
 table tr:nth-child(2n) {
@@ -71,5 +76,14 @@ table tr:nth-child(2n) {
     width: 10px;
     height: 30px;
 
+  }
+
+  .pagination {
+    font-size: 28px;
+  }
+
+  .active {
+    font-size: 30px;
+    padding: 2px 15px 2px 15px;
   }
 }

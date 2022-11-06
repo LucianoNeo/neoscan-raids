@@ -7,32 +7,34 @@ function Items({ currentItems }) {
     if (!currentItems) return <h1>Carregando...</h1>
 
     return (
-        <table className='text-white gap-4 bg-[#1E293B] mb-4 rounded-lg text-xs'>
-            <tbody>
-                <tr>
-                    <th className='text-sm p-2'>Pokémon</th>
-                    <th className='text-sm p-2'>Ginásio</th>
-                    <th className='text-sm p-2'>Abertura</th>
-                    <th className='text-sm p-2'>Fechamento</th>
-                    <th className='text-sm p-2'>Coordenadas</th>
-                </tr>
-                {currentItems &&
-                    currentItems.map((item, index) => (
+        <div className='overflow-x-auto'        >
 
-                        <tr key={index} className='bg-[#353535] border-t-[1px] border-white '>
-                            <td className='px-4 flex items-center gap-4'>
-                                <Image src={item.pokemonImg} alt='pokemon img' width={50} height={50} />
-                                {item.pokemonName.toUpperCase()}
-                            </td>
-                            <td className='px-4'>{item.ginásio.toUpperCase()}</td>
-                            <td className='px-4'>{format(utcToZonedTime(item.inicio, 'America/Sao_Paulo'), 'HH:mm', { timeZone: 'America/Sao_Paulo' })}</td>
-                            <td className='px-4'>{format(utcToZonedTime(item.fim, 'America/Sao_Paulo'), 'HH:mm', { timeZone: 'America/Sao_Paulo' })}</td>
-                            <td className='px-4'>{item.lat},{item.lon}</td>
-                        </tr>
+            <table className='text-white gap-4 bg-[#1E293B] mb-4 rounded-lg text-xs'>
+                <tbody>
+                    <tr>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Pokémon</th>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Ginásio</th>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Abertura</th>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Fechamento</th>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Coordenadas</th>
+                    </tr>
+                    {currentItems &&
+                        currentItems.map((item, index) => (
 
-                    ))}
-            </tbody>
-        </table>
+                            <tr key={index} className='bg-[#353535] border-t-[1px] border-white '>
+                                <td className='px-4 flex items-center gap-4'>
+                                    <Image src={item.pokemonImg} alt='pokemon img' width={80} height={80} />
+                                </td>
+                                <td className='px-4 text-xl'>{item.ginásio.toUpperCase()}</td>
+                                <td className='px-4 text-xl'>{format(utcToZonedTime(item.inicio, 'America/Sao_Paulo'), 'HH:mm', { timeZone: 'America/Sao_Paulo' })}</td>
+                                <td className='px-4 text-xl'>{format(utcToZonedTime(item.fim, 'America/Sao_Paulo'), 'HH:mm', { timeZone: 'America/Sao_Paulo' })}</td>
+                                <td className='px-4'>{item.lat},{item.lon}</td>
+                            </tr>
+
+                        ))}
+                </tbody>
+            </table>
+        </div>
     );
 }
 
