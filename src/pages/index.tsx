@@ -291,7 +291,7 @@ export default function App({ eggsSSR, raidsSSR }) {
 
 
                 <Dialog.Root key={match.id}
-                  open={false}
+
                 >
                   <Dialog.Trigger
                     className='items-start justify-start text-left'
