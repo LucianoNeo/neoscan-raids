@@ -20,6 +20,7 @@ import Footer from '../components/Footer'
 import OneSignal from 'react-onesignal';
 import Image from 'next/image'
 import PaginatedItems from '../components/PaginatedItems'
+import RaidsChart from '../components/Chart'
 
 async function runOneSignal() {
   await OneSignal.init({ appId: 'ad8a541e-1bda-4d6d-a74e-587711f18a54', allowLocalhostAsSecureOrigin: true });
@@ -574,7 +575,7 @@ export default function App({ eggsSSR, raidsSSR }) {
         }
       </div>
       {raidList ? <PaginatedItems itemsPerPage={10} items={filtered} /> : ''}
-
+      <RaidsChart />
       <Footer />
     </div>
   )

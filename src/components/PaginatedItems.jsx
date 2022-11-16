@@ -13,10 +13,10 @@ function Items({ currentItems }) {
                 <tbody>
                     <tr>
                         <th className='text-xl md:text-sm pl-4 md:p-4'>Pokémon</th>
-                        <th className='text-xl md:text-sm pl-4 md:p-4'>Ginásio</th>
-                        <th className='text-xl md:text-sm pl-4 md:p-4'>Abertura</th>
-                        <th className='text-xl md:text-sm pl-4 md:p-4'>Fechamento</th>
-                        <th className='text-xl md:text-sm pl-4 md:p-4'>Coordenadas</th>
+                        <th className='text-xl md:text-sm md:p-4'>Ginásio</th>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Abre</th>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Fecha</th>
+                        <th className='text-xl md:text-sm pl-4 md:p-4'>Coords</th>
                     </tr>
                     {currentItems &&
                         currentItems.map((item, index) => (
