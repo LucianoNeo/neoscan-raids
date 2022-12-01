@@ -34,7 +34,7 @@ Assim o NeoScan Raids mostra na seção de PARTIDAS AGENDADAS a Raid marcada, qu
 
 ![Screenshot_5](https://user-images.githubusercontent.com/16579699/205058899-b2086489-0bbd-4c6a-bab1-f64eb5176f70.png)
 
-Da mesma forma, outros usuários poderão clicar no banner desta raid agendada, e confirmar sua presença preenchendo o formulário que se abrirá. <br>
+Da mesma forma que ocorre o agendamento, outros usuários poderão clicar no banner desta raid agendada, e confirmar sua presença preenchendo o formulário que se abrirá. Possibilitando assim a organização das partidas em um local centralizado na web, além de oferecer a opção ao usuário de receber notificações push toda vez que uma nova partida for agendada.<br>
 
 ![Screenshot_6](https://user-images.githubusercontent.com/16579699/205057609-cffbc0d6-5a4f-465d-9685-ac93477707d0.png)
 
