@@ -46,6 +46,7 @@ O projeto em seu estado atual (beta) utiliza:
 - ORM prisma para fazer leitura e gravação no banco de dados utilizado para gravar as partidas e usuários.
 - faz a consulta das raids e ovos em um banco de dados MYSQL proveniente do NEOSCAN
 - TailwindCSS para estilização e animação
+- Utiliza o serviço ONESIGNAL para notificações push
 
 
 ## Objetivos do projeto
