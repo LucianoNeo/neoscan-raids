@@ -7,6 +7,19 @@ Projeto em desenvolvimento para o NeoScan, que permitirá que os jogadores de Po
 Deploy:<br>
 https://neoscan-raids.vercel.app/
 
+
+# Funcionamento
+
+## O que são RAIDS no Pokémon GO?
+Rais são eventos que ocorrem entre as 6 da mnhã até as 21h em ginásios (pontos de interesse espalhados pela cidade), onde surgem ovos de chefões (pokémon com um poder de combate superior aos encontrados na natureza).<br>
+Os ovos eclodem geralmente em 1 hora e a raid fica disponível para ser realizada durante 45 minutos.
+As raids em seu estado atual possuem 9 níveis de dificuldade, quanto maior o nível, mais pessoas são necessárias para derrotar o chefe, sendo possível juntar até 20 pessoas para realizá-las.
+
+## Para que serve o NeoScan Raids?
+O NeoScan Raids proporciona ao jogador saber em qual ginásio estão aparecendo os OVOS e as RAIDS já abertas, possibilitando ao usuário, ao clicar no banner do ovo ou da raid, abrir um formulário para fazer agendamento de uma partida. Assim o NeoScan Raids mostra na seção de RAIDS ABERTAS a Raid marcada, qual usuário marcou, seu nível, sua equipe, o local e o horário de início. <br>
+Da mesma forma, outros usuários poderão clicar no banner desta raid agendada, e confirmar sua presença preenchendo o formulário que se abrirá. <br>
+
+
 O projeto em seu estado atual (beta) utiliza:
 - framework NextJs para o front-end e endpoints. 
 - utiliza SSR (server side rendering) para carregar as listas assim que o usuário abre o site
