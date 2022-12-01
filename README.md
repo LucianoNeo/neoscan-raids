@@ -11,21 +11,35 @@ https://neoscan-raids.vercel.app/
 # Funcionamento
 
 ## O que são RAIDS no Pokémon GO?
-Rais são eventos que ocorrem entre as 6 da mnhã até as 21h em ginásios (pontos de interesse espalhados pela cidade), onde surgem ovos de chefões (pokémon com um poder de combate superior aos encontrados na natureza).<br>
+Raids são eventos que ocorrem entre as 6 da manhã até as 21h em ginásios (pontos de interesse espalhados pela cidade), onde surgem ovos de chefões (pokémon com um poder de combate superior aos encontrados na natureza).<br>
 Os ovos eclodem geralmente em 1 hora e a raid fica disponível para ser realizada durante 45 minutos.
 As raids em seu estado atual possuem 9 níveis de dificuldade, quanto maior o nível, mais pessoas são necessárias para derrotar o chefe, sendo possível juntar até 20 pessoas para realizá-las.
 
 ## Para que serve o NeoScan Raids?
-O NeoScan Raids proporciona ao jogador saber em qual ginásio estão aparecendo os OVOS e as RAIDS já abertas, possibilitando ao usuário, ao clicar no banner do ovo ou da raid, abrir um formulário para fazer agendamento de uma partida. Assim o NeoScan Raids mostra na seção de RAIDS ABERTAS a Raid marcada, qual usuário marcou, seu nível, sua equipe, o local e o horário de início. <br>
+O NeoScan Raids proporciona ao jogador saber em qual ginásio estão aparecendo os OVOS e as RAIDS já abertas, podendo filtra-las por nome do ginásio, level e nome do pokémon.<br>
+![Screenshot_1](https://user-images.githubusercontent.com/16579699/205057409-bb1b8cf0-7304-4b38-8496-4760a9b9bb6a.png)
+![Screenshot_2](https://user-images.githubusercontent.com/16579699/205057422-f3f7ffe2-f10f-4bbb-b47c-6305b475da09.png)
+
+Possibilitando ao usuário, ao clicar no banner do ovo ou da raid, abrir um formulário para fazer agendamento de uma partida.<br>
+![Screenshot_3](https://user-images.githubusercontent.com/16579699/205057494-9d518706-2ecf-4af9-94bd-052efb236b42.png)
+
+![Screenshot_4](https://user-images.githubusercontent.com/16579699/205057512-c5386a9c-9829-4524-a5ad-604b227612c2.png)
+
+
+Assim o NeoScan Raids mostra na seção de PARTIDAS AGENDADAS a Raid marcada, qual usuário marcou, seu nível, sua equipe, o local e o horário de início.
+
+![Screenshot_5](https://user-images.githubusercontent.com/16579699/205058899-b2086489-0bbd-4c6a-bab1-f64eb5176f70.png)
+
 Da mesma forma, outros usuários poderão clicar no banner desta raid agendada, e confirmar sua presença preenchendo o formulário que se abrirá. <br>
+![Screenshot_6](https://user-images.githubusercontent.com/16579699/205057609-cffbc0d6-5a4f-465d-9685-ac93477707d0.png)
 
-
+# Detalhes técnicos
 O projeto em seu estado atual (beta) utiliza:
 - framework NextJs para o front-end e endpoints. 
 - utiliza SSR (server side rendering) para carregar as listas assim que o usuário abre o site
 - utiliza SWR para atualizar as listas a cada 3 minutos autoticamente
-- ORM prisma para fazer leitura e gravação no banco de dados
-- faz a consulta em um banco de dados MYSQL em meu servidor próprio hospeado em uma VPS
+- ORM prisma para fazer leitura e gravação no banco de dados utilizado para gravar as partidas e usuários.
+- faz a consulta das raids e ovos em um banco de dados MYSQL proveniente do NEOSCAN
 - TailwindCSS para estilização e animação
 
 
