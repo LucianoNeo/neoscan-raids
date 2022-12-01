@@ -20,10 +20,14 @@ O NeoScan Raids proporciona ao jogador saber em qual ginásio estão aparecendo 
 ![Screenshot_1](https://user-images.githubusercontent.com/16579699/205057409-bb1b8cf0-7304-4b38-8496-4760a9b9bb6a.png)
 ![Screenshot_2](https://user-images.githubusercontent.com/16579699/205057422-f3f7ffe2-f10f-4bbb-b47c-6305b475da09.png)
 
-Possibilitando ao usuário, ao clicar no banner do ovo ou da raid, abrir um formulário para fazer agendamento de uma partida.<br>
-![Screenshot_3](https://user-images.githubusercontent.com/16579699/205057494-9d518706-2ecf-4af9-94bd-052efb236b42.png)
+Possibilitando ao usuário, ao clicar no banner do ovo ou da raid, abrir um formulário para fazer agendamento de uma partida.
 
-![Screenshot_4](https://user-images.githubusercontent.com/16579699/205057512-c5386a9c-9829-4524-a5ad-604b227612c2.png)
+| OVO | RAID |
+|----------|----------|
+| ![Screenshot_3](https://user-images.githubusercontent.com/16579699/205057494-9d518706-2ecf-4af9-94bd-052efb236b42.png) |  ![Screenshot_4](https://user-images.githubusercontent.com/16579699/205057512-c5386a9c-9829-4524-a5ad-604b227612c2.png)
+
+
+
 
 
 Assim o NeoScan Raids mostra na seção de PARTIDAS AGENDADAS a Raid marcada, qual usuário marcou, seu nível, sua equipe, o local e o horário de início.
@@ -31,6 +35,7 @@ Assim o NeoScan Raids mostra na seção de PARTIDAS AGENDADAS a Raid marcada, qu
 ![Screenshot_5](https://user-images.githubusercontent.com/16579699/205058899-b2086489-0bbd-4c6a-bab1-f64eb5176f70.png)
 
 Da mesma forma, outros usuários poderão clicar no banner desta raid agendada, e confirmar sua presença preenchendo o formulário que se abrirá. <br>
+
 ![Screenshot_6](https://user-images.githubusercontent.com/16579699/205057609-cffbc0d6-5a4f-465d-9685-ac93477707d0.png)
 
 # Detalhes técnicos
