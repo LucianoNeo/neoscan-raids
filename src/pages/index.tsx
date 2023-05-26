@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
-import Bulba from "../../public/assets/img/bulbaSad.png";
-import RaidBanner from "../components/RaidBanner";
-import Rotom from "../../public/assets/img/rotom.gif";
-import Logo from "../../public/assets/img/logo.png";
 import Carousel from "@itseasy21/react-elastic-carousel";
 import * as Dialog from "@radix-ui/react-dialog";
 import axios from "axios";
 import { format, toDate, utcToZonedTime } from "date-fns-tz";
 import { GetStaticProps } from "next";
-import useSWR from "swr";
-import CreateEggModal from "../components/CreateEggModal";
-import EggBanner from "../components/EggBanner";
-import Loader from "../components/Loader";
-import CreateRaidModal from "../components/CreateRaidModal";
-import MatchBanner from "../components/MatchBanner";
-import EnterRaidModal from "../components/EnterRaidModal";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import OneSignal from "react-onesignal";
 import Image from "next/image";
-import PaginatedItems from "../components/PaginatedItems";
+import { useEffect, useState } from "react";
+import OneSignal from "react-onesignal";
+import useSWR from "swr";
+import Bulba from "../../public/assets/img/bulbaSad.png";
+import Logo from "../../public/assets/img/logo.png";
 import RaidsChart from "../components/Chart";
+import CreateEggModal from "../components/CreateEggModal";
+import CreateRaidModal from "../components/CreateRaidModal";
+import EggBanner from "../components/EggBanner";
+import EnterRaidModal from "../components/EnterRaidModal";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Loader from "../components/Loader";
+import MatchBanner from "../components/MatchBanner";
+import { MultiSelectLevels } from "../components/MultiSelect";
+import PaginatedItems from "../components/PaginatedItems";
+import RaidBanner from "../components/RaidBanner";
 
 async function runOneSignal() {
   await OneSignal.init({
@@ -159,10 +159,10 @@ export default function App({ eggsSSR, raidsSSR }) {
   const [eggSearch, setEggSearch] = useState("");
   const [filter, setFilter] = useState("pokemon");
   const [raidsLevel, setRaidsLevel] = useState(
-    new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    new Set([5])
   );
   const [eggsLevel, setEggsLevel] = useState(
-    new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    new Set([5])
   );
   const [raidList, setRaidList] = useState(false);
 
@@ -349,109 +349,9 @@ export default function App({ eggsSSR, raidsSSR }) {
               className="bg-slate-900 p-2 rounded text-white md:w-80 w-[600px] text-3xl md:text-base"
             />
           </div>
-          <div className="flex gap-3 items-center text-3xl md:text-lg">
+          <div className="flex gap-3 items-center text-3xl md:text-lg max-w-sm">
             <h1 className="text-white">FILTROS:</h1>
-            <div className="text-white text-3xl md:text-xs grid  grid-cols-2 gap-2">
-              <div className="gap-2 flex">
-                <label htmlFor="level1">Level 1</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level1"
-                  id="1"
-                  checked={eggsLevel.has(1)}
-                  onChange={() => handleEggLevel(1)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level3">Level 3</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level3"
-                  id="3"
-                  checked={eggsLevel.has(3)}
-                  onChange={() => handleEggLevel(3)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level4">Level 4</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level4"
-                  id="4"
-                  checked={eggsLevel.has(4)}
-                  onChange={() => handleEggLevel(4)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level5">Level 5</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level3"
-                  id="5"
-                  checked={eggsLevel.has(5)}
-                  onChange={() => handleEggLevel(5)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Mega Raids</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level6"
-                  id="6"
-                  checked={eggsLevel.has(6)}
-                  onChange={() => handleEggLevel(6)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Mega Raids L7</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level6"
-                  id="6"
-                  checked={eggsLevel.has(7)}
-                  onChange={() => handleEggLevel(7)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Mega Raids L8</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level6"
-                  id="6"
-                  checked={eggsLevel.has(8)}
-                  onChange={() => handleEggLevel(8)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Elite Raids</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level9"
-                  id="9"
-                  checked={eggsLevel.has(9)}
-                  onChange={() => handleEggLevel(9)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Primal Raids</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level9"
-                  id="9"
-                  checked={eggsLevel.has(10)}
-                  onChange={() => handleEggLevel(10)}
-                />
-              </div>
-            </div>
+            <MultiSelectLevels onChange={setEggsLevel} />
           </div>
         </div>
         {eggsFiltered && eggsFiltered.length == 0 && (
@@ -581,109 +481,9 @@ export default function App({ eggsSSR, raidsSSR }) {
               <option value="gym">Ginásio</option>
             </select>
           </div>
-          <div className="flex gap-3 items-center text-3xl md:text-lg">
+          <div className="flex gap-3 items-center text-3xl md:text-lg min-w-sm max-w-sm">
             <h1 className="text-white">FILTROS:</h1>
-            <div className="text-white text-3xl md:text-xs grid  grid-cols-2 gap-1 flex-wrap">
-              <div className="gap-2 flex">
-                <label htmlFor="level1">Level 1</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level1"
-                  id="1"
-                  checked={raidsLevel.has(1)}
-                  onChange={() => handleRaidLevel(1)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level3">Level 3</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level3"
-                  id="3"
-                  checked={raidsLevel.has(3)}
-                  onChange={() => handleRaidLevel(3)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level4">Level 4</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level4"
-                  id="4"
-                  checked={raidsLevel.has(4)}
-                  onChange={() => handleRaidLevel(4)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level5">Level 5</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level3"
-                  id="3"
-                  checked={raidsLevel.has(5)}
-                  onChange={() => handleRaidLevel(5)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Mega Raids</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level6"
-                  id="6"
-                  checked={raidsLevel.has(6)}
-                  onChange={() => handleRaidLevel(6)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Mega Raids L7</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level6"
-                  id="6"
-                  checked={raidsLevel.has(7)}
-                  onChange={() => handleRaidLevel(7)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Mega Raids L8</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level6"
-                  id="6"
-                  checked={raidsLevel.has(8)}
-                  onChange={() => handleRaidLevel(8)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Elite Raids</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level9"
-                  id="9"
-                  checked={raidsLevel.has(9)}
-                  onChange={() => handleRaidLevel(9)}
-                />
-              </div>
-              <div className="gap-2 flex">
-                <label htmlFor="level6">Primal Raids</label>
-                <input
-                  className="md:w-4 w-10"
-                  type="checkbox"
-                  name="level9"
-                  id="9"
-                  checked={raidsLevel.has(10)}
-                  onChange={() => handleRaidLevel(10)}
-                />
-              </div>
-            </div>
+            <MultiSelectLevels onChange={setRaidsLevel} />
           </div>
         </div>
         {filtered && filtered.length == 0 && (

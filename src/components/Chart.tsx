@@ -17,7 +17,6 @@ export default function RaidsChart() {
             array.push(level.data)
             data.push(array)
         }
-        console.log(data)
         setIsLoading(false)
     }
 
